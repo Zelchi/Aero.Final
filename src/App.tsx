@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Tela } from './components/Tela'
 
 const Jogo = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ const Jogo = styled.div`
 function App() {
     return (
         <Jogo>
-            Aqui vai ficar a tela
+            <Tela></Tela>
         </Jogo>
     )
 }
