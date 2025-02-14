@@ -63,7 +63,7 @@ export const BarraJanela = () => {
                 
             </Caixa1>
 
-            <Titulo>Techdoro</Titulo>
+            <Titulo>Batata Voadora</Titulo>
 
             <Caixa2>
                 <Minimizar
