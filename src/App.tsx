@@ -6,18 +6,14 @@ const Jogo = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
     height: 100vh;
     width: 100vw;
-
-    background-color: #1c1c1c;
-    color: white;
 `
 
 function App() {
     return (
         <Jogo>
-            <Tela></Tela>
+            <Tela />
         </Jogo>
     )
 }
