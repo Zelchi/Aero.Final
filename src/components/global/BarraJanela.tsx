@@ -62,7 +62,7 @@ export const BarraJanela = () => {
     <Barra>
       <Caixa1></Caixa1>
 
-      <Titulo>Batata Voadora</Titulo>
+      <Titulo>Aero Final</Titulo>
 
       <Caixa2>
         <Minimizar
