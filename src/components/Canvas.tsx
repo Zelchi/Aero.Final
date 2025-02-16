@@ -25,9 +25,7 @@ const Canvas = () => {
     context.fillRect(400, 450, 60, 15);
     //player
     const player = new Player();
-    player.position.x = canvas.width / 2 - player.width / 2;
-    player.position.y = canvas.height - player.height - 30;
-    player.draw(context);
+    player.draw(context, canvas);
   }, []);
 
   return <Tela ref={canvasRef} width="600" height="600" />;
