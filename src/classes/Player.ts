@@ -1,22 +1,27 @@
 class Player {
-  private width: number;
-  private height: number;
-  private position: { x: number; y: number };
-  constructor() {
+  width: number;
+  height: number;
+  position: { x: number; y: number };
+  speed: number;
+  constructor(canvasWidth: number, canvasHeight: number) {
     this.width = 50;
     this.height = 50;
-    this.position = { x: 0, y: 0 };
+    this.speed = 5;
+    this.position = {
+      x: canvasWidth / 2 - this.width / 2,
+      y: canvasHeight - this.height - 30,
+    };
   }
-  draw(context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-    this.position.x = canvas.width / 2 - this.width / 2;
-    this.position.y = canvas.height - this.height - 30;
+  moveLeft() {
+    this.position.x -= this.speed;
+  }
+  moveRight() {
+    this.position.x += this.speed;
+  }
+  draw(context: CanvasRenderingContext2D) {
     context.fillStyle = "rgb(119, 6, 5)";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
-  // up() {
-  //   this.position.y -= 100;
-  //   console.log(this.position.y);
-  // }
 }
 
 export default Player;
