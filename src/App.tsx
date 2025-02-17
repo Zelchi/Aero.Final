@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Tela } from './components/Tela'
+import { Tela } from './components/jogo/Tela'
 import { BarraJanela } from './components/global/BarraJanela'
 
 const Jogo = styled.div`

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import Player from "../classes/Player";
+import Player from "../../classes/Player";
 
 const Canvas = ({ $largura, $altura}: tamanhoTela) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
