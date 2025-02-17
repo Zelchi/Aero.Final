@@ -21,7 +21,7 @@ function App() {
         <Jogo>
             <BarraJanela />
             {!isRun && <Menu {...{isRun, setIsRun }} />}
-            {isRun && <Tela />}
+            {isRun && <Tela {...{isRun, setIsRun }}/>}
         </Jogo>
     )
 }

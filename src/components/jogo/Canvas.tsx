@@ -14,6 +14,8 @@ const Canvas = ({ $largura, $altura}: tamanhoTela) => {
         const keys = {
             left: false,
             right: false,
+            up: false,
+            down: false,
         };
         const gameLoop = () => {
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -22,6 +24,12 @@ const Canvas = ({ $largura, $altura}: tamanhoTela) => {
             }
             if (keys.right && player.position.x < canvas.width - player.width - 10) {
                 player.moveRight();
+            }
+            if (keys.up && player.position.y >= 0) {
+                player.moveUp();
+            }
+            if (keys.down && player.position.y < canvas.width - player.width - 10) {
+                player.moveDown();
             }
             player.draw(context);
             requestAnimationFrame(gameLoop);
@@ -32,11 +40,15 @@ const Canvas = ({ $largura, $altura}: tamanhoTela) => {
 
             if (key === "a") keys.left = true;
             if (key === "d") keys.right = true;
+            if (key === "w") keys.up = true;
+            if (key === "s") keys.down = true;
         });
         addEventListener("keyup", (e) => {
             const key = e.key.toLowerCase();
             if (key === "a") keys.left = false;
             if (key === "d") keys.right = false;
+            if (key === "w") keys.up = false;
+            if (key === "s") keys.down = false;
         });
         gameLoop();
     }, []);

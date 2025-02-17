@@ -28,6 +28,12 @@ class Player {
   moveRight() {
     this.position.x += this.speed;
   }
+  moveUp() {
+    this.position.y -= this.speed;
+  }
+  moveDown() {
+    this.position.y += this.speed;
+  }
   draw(context: CanvasRenderingContext2D) {
     context.drawImage(this.image, this.position.x, this.position.y);
   }

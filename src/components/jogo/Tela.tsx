@@ -16,12 +16,20 @@ const Caixa = styled.div<{ $largura: number; $altura: number }>`
     border-top: 5px solid #1c1c1c;
 `;
 
-export const Tela = () => {
+export const Tela = ({ setIsRun }: isRun) => {
     const [tamanhoTela, setTamanhoTela] = useState({ largura: window.innerWidth, altura: window.innerHeight });
 
+    const handleResize = () => {
+        setTamanhoTela({ largura: window.innerWidth, altura: window.innerHeight });
+        setIsRun(false);
+    };
+
     useEffect(() => {
-        return setTamanhoTela({ largura: window.innerWidth, altura: window.innerHeight });
-    }, [window.innerHeight, window.innerWidth]);
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [window.innerWidth, window.innerHeight]);
 
     return (
         <Caixa $largura={tamanhoTela.largura} $altura={tamanhoTela.altura}>
