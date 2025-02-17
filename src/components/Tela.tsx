@@ -20,13 +20,7 @@ export const Tela = () => {
     const [tamanhoTela, setTamanhoTela] = useState({ largura: window.innerWidth, altura: window.innerHeight });
 
     useEffect(() => {
-        const DefineNovoTamanho = () => {
-            setTamanhoTela({ largura: window.innerWidth, altura: window.innerHeight });
-        };
-
-        return () => {
-            window.removeEventListener('resize', DefineNovoTamanho);
-        };
+        return setTamanhoTela({ largura: window.innerWidth, altura: window.innerHeight });
     }, [window.innerHeight, window.innerWidth]);
 
     return (
