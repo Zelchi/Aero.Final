@@ -19,6 +19,8 @@ const createWindow = () => {
 
         height: 800,
         width: 800,
+        minHeight: 800,
+        minWidth: 800,
     });
 
     (isDev()) ? win.loadURL('http://localhost:5173/') : win.loadFile(path.join(__dirname, '../index.html'))
