@@ -12,6 +12,8 @@ const Caixa = styled.div<{ $largura: number; $altura: number }>`
     
     background-image: url(${space});
     background-size: cover;
+    border: 10px solid #1c1c1c;
+    border-top: 5px solid #1c1c1c;
 `;
 
 export const Tela = () => {
@@ -23,7 +25,7 @@ export const Tela = () => {
 
     return (
         <Caixa $largura={tamanhoTela.largura} $altura={tamanhoTela.altura}>
-            <Canvas $largura={tamanhoTela.largura - 50} $altura={tamanhoTela.altura - 50} />
+            <Canvas $largura={tamanhoTela.largura - 100} $altura={tamanhoTela.altura - 100} />
         </Caixa>
     );
 };
