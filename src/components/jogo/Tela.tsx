@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Canvas from './Canvas';
-import space from '../assets/images/space.jpg';
+import space from '../../assets/images/space.jpg';
 
 const Caixa = styled.div<{ $largura: number; $altura: number }>`
     display: flex;
