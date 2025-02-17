@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Tela } from './components/jogo/Tela'
 import { BarraJanela } from './components/global/BarraJanela'
+import { useState } from 'react'
+import { Menu } from './components/menu/Menu'
 
 const Jogo = styled.div`
     display: flex;
@@ -13,10 +15,13 @@ const Jogo = styled.div`
 `
 
 function App() {
+    const [isRun, setIsRun] = useState(false);
+
     return (
         <Jogo>
             <BarraJanela />
-            <Tela />
+            {!isRun && <Menu {...{isRun, setIsRun }} />}
+            {isRun && <Tela />}
         </Jogo>
     )
 }
