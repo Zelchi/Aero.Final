@@ -6,8 +6,8 @@ class Player {
   speed: number;
   image: HTMLImageElement;
   constructor(canvasWidth: number, canvasHeight: number) {
-    this.width = 50;
-    this.height = 50;
+    this.width = 30;
+    this.height = 30;
     this.speed = 5;
     this.position = {
       x: canvasWidth / 2 - this.width / 2,

@@ -7,10 +7,10 @@ const Barra = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #3c3c3c;
-  color: white;
   -webkit-app-region: drag;
-  border-radius: 20px;
+
+  border: 5px outset white;
+  background-color: #3c3c3c;
 `;
 
 const Titulo = styled.h1`

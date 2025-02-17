@@ -9,6 +9,7 @@ const Jogo = styled.div`
     align-items: center;
     height: 100vh;
     width: 100vw;
+    color: white;
 `
 
 function App() {
