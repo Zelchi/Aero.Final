@@ -93,7 +93,7 @@ export const BarraJanela = () => {
                 <Icon src={icon} />
             </Caixa1>
 
-            <Titulo>Areo Final</Titulo>
+            <Titulo>Aero Final</Titulo>
 
             <Caixa2>
                 <Minimizar
