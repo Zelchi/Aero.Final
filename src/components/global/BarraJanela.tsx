@@ -9,7 +9,6 @@ const Barra = styled.div`
   align-items: center;
   -webkit-app-region: drag;
 
-  border: 5px outset white;
   background-color: #3c3c3c;
 `;
 

@@ -10,8 +10,6 @@ const Caixa = styled.div<{ $largura: number; $altura: number }>`
     width: ${(props) => props.$largura}px;
     height: ${(props) => props.$altura}px;
     
-    border: 3px outset white;
-    border-top: none;
     background-image: url(${space});
     background-size: cover;
 `;
