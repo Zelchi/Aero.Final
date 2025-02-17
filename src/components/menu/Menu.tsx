@@ -44,8 +44,8 @@ export const Menu = ({setIsRun}: isRun) => {
     return (
         <Tela>
             <Caixa>
-                <h1>Fase 1</h1>
-                <p>Em busca da ultima batata do universo</p>
+                <h1>Aero Final</h1>
+                <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
                 <Button onClick={() => setIsRun(true)}>Iniciar</Button>
             </Caixa>
         </Tela>
