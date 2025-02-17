@@ -14,7 +14,7 @@ const Canvas = () => {
     if (!canvas) return;
     const context = canvas.getContext("2d");
     if (!context) return;
-    //background
+    // //background
     // context.fillStyle = "#000000";
     // context.fillRect(0, 0, 600, 600);
     // //barreira 1
@@ -23,7 +23,7 @@ const Canvas = () => {
     // //barreira 2
     // context.fillStyle = "rgb(119, 6, 5)";
     // context.fillRect(400, 450, 60, 15);
-    //player
+    // //player
     const player = new Player(canvas.width, canvas.height);
     const keys = {
       left: false,
@@ -41,8 +41,6 @@ const Canvas = () => {
       requestAnimationFrame(gameLoop);
     };
 
-    gameLoop();
-
     addEventListener("keydown", (e) => {
       const key = e.key.toLowerCase();
 
@@ -54,6 +52,7 @@ const Canvas = () => {
       if (key === "a") keys.left = false;
       if (key === "d") keys.right = false;
     });
+    gameLoop();
   }, []);
 
   return <Tela ref={canvasRef} width="600" height="600" />;
