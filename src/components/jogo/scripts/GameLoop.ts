@@ -1,4 +1,5 @@
 import Player from "../../../classes/Player";
+import Rock from "../../../classes/Rock";
 type Keys = {
   left: boolean;
   right: boolean;
@@ -9,7 +10,8 @@ const gameLoop = (
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
   keys: Keys,
-  player: Player
+  player: Player,
+  rock: Rock
 ) => {
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -26,6 +28,7 @@ const gameLoop = (
       player.moveDown();
     }
     player.draw(context);
+    rock.draw(context);
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);

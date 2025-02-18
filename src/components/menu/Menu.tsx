@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useSound } from "../../utils/hooks/useSound";
 
 const Tela = styled.div`
   height: 100%;
@@ -72,6 +73,11 @@ const Button = styled.div`
 
 export const Menu = ({ setIsRun }: isRun) => {
   const [configMenu, setConfigMenu] = useState(false);
+  // const [playMenu] = useSound("menu");
+
+  // useEffect(() => {
+  //   playMenu();
+  // }, []);
 
   return (
     <Tela>

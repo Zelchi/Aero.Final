@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Player from "../../classes/Player";
+import Rock from "../../classes/Rock";
 import gameLoop from "./scripts/GameLoop";
 
 const keys = {
@@ -26,6 +27,7 @@ addEventListener("keyup", (e) => {
 
 const Canvas = ({ $largura, $altura }: tamanhoTela) => {
   const [player] = useState(new Player($largura, $altura));
+  const [rock] = useState(new Rock($largura, $altura));
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const Canvas = ({ $largura, $altura }: tamanhoTela) => {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    gameLoop(canvas, context, keys, player);
+    gameLoop(canvas, context, keys, player, rock);
   }, [player, canvasRef]);
 
   return <canvas ref={canvasRef} width={$largura} height={$altura} />;

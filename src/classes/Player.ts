@@ -35,7 +35,6 @@ class Player {
     this.position.y += this.speed;
   }
   draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = "orange";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
     context.drawImage(
       this.image,
