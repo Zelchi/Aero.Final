@@ -1,5 +1,9 @@
 import { useRef, useEffect } from "react";
 import Player from "../../classes/Player";
+import styled from "styled-components";
+
+const TelaCanvas = styled.canvas`
+`
 
 const Canvas = ({ $largura, $altura}: tamanhoTela) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -28,7 +32,7 @@ const Canvas = ({ $largura, $altura}: tamanhoTela) => {
             if (keys.up && player.position.y >= 0) {
                 player.moveUp();
             }
-            if (keys.down && player.position.y < canvas.width - player.width - 10) {
+            if (keys.down && player.position.y < canvas.height - player.height - 10) {
                 player.moveDown();
             }
             player.draw(context);
@@ -53,7 +57,7 @@ const Canvas = ({ $largura, $altura}: tamanhoTela) => {
         gameLoop();
     }, []);
 
-    return <canvas ref={canvasRef} width={$largura} height={$altura} />;
+    return <TelaCanvas ref={canvasRef} width={$largura} height={$altura} />;
 };
 
 export default Canvas;

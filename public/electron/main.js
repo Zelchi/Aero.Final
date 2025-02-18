@@ -21,6 +21,7 @@ const createWindow = () => {
         width: 800,
         minHeight: 800,
         minWidth: 800,
+        fullscreen: true,
     });
 
     (isDev()) ? win.loadURL('http://localhost:5173/') : win.loadFile(path.join(__dirname, '../index.html'))
@@ -30,8 +31,12 @@ const createWindow = () => {
     })
 
     ipcMain.on('maximizar', () => {
-        win.isMaximized() ? win.unmaximize() : win.maximize();
-    })
+        if (win.isFullScreen()) {
+            win.setFullScreen(false);
+        } else {
+            win.setFullScreen(true);
+        }
+    });
 
     ipcMain.on('fechar', () => {
         win.close();
