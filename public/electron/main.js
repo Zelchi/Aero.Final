@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { fileURLToPath } from "url";
+import { isDev } from './utils.js'
 import path from "path";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,19 +16,29 @@ const createWindow = () => {
             sandbox: false,
             preload: path.join(__dirname, 'preload.cjs')
         },
-        width: 1280,
-        minWidth: 1280,
-        maxWidth: 1280,
-        height: 720,
-        minHeight: 720,
-        minHeight: 720,
-        resizable: false,
+
+        height: 800,
+        width: 800,
+        minHeight: 800,
+        minWidth: 800,
+        fullscreen: true,
     });
-    win.loadURL('http://localhost:5173');
+
+    (isDev()) ? win.loadURL('http://localhost:5173/') : win.loadFile(path.join(__dirname, '../index.html'))
 
     ipcMain.on('minimizar', () => {
         win.minimize();
     })
+
+    ipcMain.on('maximizar', () => {
+        if (win.isFullScreen()) {
+            win.setFullScreen(false);
+            win.webContents.send('telacheia', false);
+        } else {
+            win.setFullScreen(true);
+            win.webContents.send('telacheia', true);
+        }
+    });
 
     ipcMain.on('fechar', () => {
         win.close();
