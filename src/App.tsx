@@ -3,7 +3,9 @@ import { Tela } from "./components/jogo/Tela";
 import { BarraJanela } from "./components/menu/BarraJanela";
 import { useState, useEffect } from "react";
 import { Menu } from "./components/menu/Menu";
-import { BackgroundMusic } from "./components/menu/Music";
+import { BackgroundMusic } from "./components/menu/BackgroundMusic";
+import { setFullscreen } from "./store/reducers/fullscreenSlice";
+import { useDispatch } from "react-redux";
 
 const Jogo = styled.div`
   display: flex;
@@ -17,17 +19,17 @@ const Jogo = styled.div`
 
 function App() {
     const [isRun, setIsRun] = useState(false);
-    const [isCheia, setIsCheia] = useState(true);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        window.api.receive("telacheia", (b: boolean) => {
-            setIsCheia(b);
-        });
-    }, [isCheia]);
+        window.api.receive("telacheia", () => dispatch(setFullscreen(true)));
+        window.api.receive("sairtelacheia", () => dispatch(setFullscreen(false)));
+    }, []);
 
     return (
         <Jogo>
-            {!isCheia && <BarraJanela isCheia={isCheia} />}
+            <BarraJanela />
             {!isRun && <>
                 <Menu {...{ isRun, setIsRun }} />
                 <BackgroundMusic />

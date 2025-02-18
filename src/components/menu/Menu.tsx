@@ -1,6 +1,8 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { Volume } from "./Volume";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import styled from "styled-components";
 
 const Tela = styled.div`
   height: 100%;
@@ -74,6 +76,7 @@ const Button = styled.div`
 
 export const Menu = ({ setIsRun }: isRun) => {
     const [configMenu, setConfigMenu] = useState(false);
+    const { tela } = useSelector((state: RootState) => state.fullscreenState);
 
     return (
         <Tela>
@@ -96,7 +99,7 @@ export const Menu = ({ setIsRun }: isRun) => {
                                     window.api.send("maximizar");
                                 }}
                             >
-                                Janela/Tela Cheia
+                                {tela ? "Modo janela" : "Tela cheia"}
                             </Button>
                             <Button><Volume /></Button>
                             <Button onClick={() => setConfigMenu(false)}>Voltar</Button>

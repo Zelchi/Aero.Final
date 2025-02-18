@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import icon from '../../assets/images/invader.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const larguraBotao = '20px';
 const alturaBotao = '20px';
@@ -84,15 +86,12 @@ const Fechar = styled.div`
     }
 `;
 
-type isCheia = {
-    isCheia: boolean
-}
-
-export const BarraJanela = (isCheia:isCheia) => {
+export const BarraJanela = () => {
     const [miniColor, setMiniColor] = useState(false);
+    const { tela } = useSelector((state: RootState) => state.fullscreenState);
 
     return (
-        <Barra $visible={!isCheia}>
+        <Barra $visible={tela}>
             <Caixa1>
                 <Icon src={icon} />
             </Caixa1>
