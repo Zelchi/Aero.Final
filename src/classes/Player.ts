@@ -4,11 +4,13 @@ class Player {
   height: number;
   position: { x: number; y: number };
   speed: number;
+  rotation: number;
   image: HTMLImageElement;
   constructor(Width: number, Height: number) {
     this.width = Height * 0.08;
     this.height = Height * 0.08;
     this.speed = Height * 0.01;
+    this.rotation = 0;
     this.position = {
       x: Width / 2 - this.width / 2,
       y: Height - this.height - 30,
@@ -34,6 +36,7 @@ class Player {
   moveDown() {
     this.position.y += this.speed;
   }
+  rotationPlayer() {}
   draw(context: CanvasRenderingContext2D) {
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
     context.drawImage(

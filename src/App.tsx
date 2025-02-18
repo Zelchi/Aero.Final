@@ -18,7 +18,6 @@ const Jogo = styled.div`
 function App() {
   const [isRun, setIsRun] = useState(false);
   const [isCheia, setIsCheia] = useState(true);
-  const [playHit] = useSound("hit");
 
   useEffect(() => {
     window.api.receive("telacheia", (b: boolean) => {
@@ -29,7 +28,7 @@ function App() {
   return (
     <Jogo>
       {!isCheia && <BarraJanela isCheia={isCheia} />}
-      {!isRun && <Menu {...{ isRun, setIsRun }} onClick={() => playHit()} />}
+      {!isRun && <Menu {...{ isRun, setIsRun }} />}
       {isRun && <Tela {...{ isRun, setIsRun }} />}
     </Jogo>
   );
