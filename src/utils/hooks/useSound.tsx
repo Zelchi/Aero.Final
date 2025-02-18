@@ -1,10 +1,18 @@
 import { useRef, useEffect } from "react";
 import hit from "../../assets/audios/hit.mp3";
 import menu from "../../assets/audios/menu.mp3";
+import select from "../../assets/audios/select.mp3";
+import start from "../../assets/audios/start.mp3";
+import explosion from "../../assets/audios/explosion.mp3";
+import next_level from "../../assets/audios/next_level.mp3";
 
 const efeitosSonoros = {
   hit,
   menu,
+  select,
+  start,
+  explosion,
+  next_level,
 } as const;
 
 type som = keyof typeof efeitosSonoros;
