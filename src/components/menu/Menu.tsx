@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSound } from "../../utils/hooks/useSound";
+import { Volume } from "./Volume";
 
 const Tela = styled.div`
   height: 100%;
@@ -60,6 +61,7 @@ const Botoes = styled.div`
 
 const Button = styled.div`
   width: 100%;
+  height: 50px;
   padding: 10px;
   text-align: center;
   border: 3px outset gray;
@@ -73,11 +75,11 @@ const Button = styled.div`
 
 export const Menu = ({ setIsRun }: isRun) => {
   const [configMenu, setConfigMenu] = useState(false);
-  // const [playMenu] = useSound("menu");
+  const [playMenu] = useSound("menu");
 
-  // useEffect(() => {
-  //   playMenu();
-  // }, []);
+  useEffect(() => {
+    playMenu();
+  }, []);
 
   return (
     <Tela>
@@ -102,7 +104,7 @@ export const Menu = ({ setIsRun }: isRun) => {
               >
                 Janela/Tela Cheia
               </Button>
-              <Button>Volume?</Button>
+              <Button><Volume /></Button>
               <Button onClick={() => setConfigMenu(false)}>Voltar</Button>
             </Botoes>
           </Menu1>
