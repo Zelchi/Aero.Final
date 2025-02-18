@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux'
+import { setVolume } from '../../store/reducers/volumeSlice'
 import styled from "styled-components";
 
 const Caixa = styled.div`
@@ -34,29 +36,34 @@ const Button = styled.div`
 
 export const Volume = () => {
     const [modal, setModalOpen] = useState(false);
-    const [range, setRange] = useState(30);
+    const [range, setRange] = useState(1);
     const [cursor, setCursor] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setVolume(range))
+    }, [range])
 
     useEffect(() => {
         const intervalo = setTimeout(() => {
             if (cursor) return;
             setModalOpen(false);
-        }, 1000);
+        }, 1000)
 
         if (!cursor) {
             return () => clearTimeout(intervalo);
         }
-    }, [cursor]);
+    }, [cursor])
 
     useEffect(() => {
-        const vol = localStorage.getItem("volume");
+        const vol = localStorage.getItem('volume');
         if (vol) {
             setRange(Number(vol));
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("volume", JSON.stringify(range));
+        localStorage.setItem('volume', JSON.stringify(range));
     }, [range]);
 
     return (

@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { useSound } from "../../utils/hooks/useSound";
 import { Volume } from "./Volume";
 
 const Tela = styled.div`
@@ -74,42 +73,37 @@ const Button = styled.div`
 `;
 
 export const Menu = ({ setIsRun }: isRun) => {
-  const [configMenu, setConfigMenu] = useState(false);
-  const [playMenu] = useSound("menu");
+    const [configMenu, setConfigMenu] = useState(false);
 
-  useEffect(() => {
-    playMenu();
-  }, []);
-
-  return (
-    <Tela>
-      <Container>
-        {!configMenu ? (
-          <Menu1>
-            <h1>Aero Final</h1>
-            <p></p>
-            <Botoes>
-              <Button onClick={() => setIsRun(true)}>Iniciar</Button>
-              <Button onClick={() => setConfigMenu(true)}>Configurações</Button>
-              <Button onClick={() => window.api.send("fechar")}>Sair</Button>
-            </Botoes>
-          </Menu1>
-        ) : (
-          <Menu1>
-            <Botoes>
-              <Button
-                onClick={() => {
-                  window.api.send("maximizar");
-                }}
-              >
-                Janela/Tela Cheia
-              </Button>
-              <Button><Volume /></Button>
-              <Button onClick={() => setConfigMenu(false)}>Voltar</Button>
-            </Botoes>
-          </Menu1>
-        )}
-      </Container>
-    </Tela>
-  );
+    return (
+        <Tela>
+            <Container>
+                {!configMenu ? (
+                    <Menu1>
+                        <h1>Aero Final</h1>
+                        <p></p>
+                        <Botoes>
+                            <Button onClick={() => setIsRun(true)}>Iniciar</Button>
+                            <Button onClick={() => setConfigMenu(true)}>Configurações</Button>
+                            <Button onClick={() => window.api.send("fechar")}>Sair</Button>
+                        </Botoes>
+                    </Menu1>
+                ) : (
+                    <Menu1>
+                        <Botoes>
+                            <Button
+                                onClick={() => {
+                                    window.api.send("maximizar");
+                                }}
+                            >
+                                Janela/Tela Cheia
+                            </Button>
+                            <Button><Volume /></Button>
+                            <Button onClick={() => setConfigMenu(false)}>Voltar</Button>
+                        </Botoes>
+                    </Menu1>
+                )}
+            </Container>
+        </Tela>
+    );
 };

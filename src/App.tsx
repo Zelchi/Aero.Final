@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { Tela } from "./components/jogo/Tela";
 import { BarraJanela } from "./components/menu/BarraJanela";
 import { useState, useEffect } from "react";
-import { useSound } from "./utils/hooks/useSound";
 import { Menu } from "./components/menu/Menu";
+import { BackgroundMusic } from "./components/menu/Music";
 
 const Jogo = styled.div`
   display: flex;
@@ -16,23 +16,25 @@ const Jogo = styled.div`
 `;
 
 function App() {
-  const [isRun, setIsRun] = useState(false);
-  const [isCheia, setIsCheia] = useState(true);
-  const [playHit] = useSound("hit");
+    const [isRun, setIsRun] = useState(false);
+    const [isCheia, setIsCheia] = useState(true);
 
-  useEffect(() => {
-    window.api.receive("telacheia", (b: boolean) => {
-      setIsCheia(b);
-    });
-  }, [isCheia]);
+    useEffect(() => {
+        window.api.receive("telacheia", (b: boolean) => {
+            setIsCheia(b);
+        });
+    }, [isCheia]);
 
-  return (
-    <Jogo>
-      {!isCheia && <BarraJanela isCheia={isCheia} />}
-      {!isRun && <Menu {...{ isRun, setIsRun }} onClick={() => playHit()} />}
-      {isRun && <Tela {...{ isRun, setIsRun }} />}
-    </Jogo>
-  );
+    return (
+        <Jogo>
+            {!isCheia && <BarraJanela isCheia={isCheia} />}
+            {!isRun && <>
+                <Menu {...{ isRun, setIsRun }} />
+                <BackgroundMusic />
+            </>}
+            {isRun && <Tela {...{ isRun, setIsRun }} />}
+        </Jogo>
+    );
 }
 
 export default App;

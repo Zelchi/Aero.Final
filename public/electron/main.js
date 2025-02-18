@@ -21,7 +21,7 @@ const createWindow = () => {
     width: 800,
     minHeight: 800,
     minWidth: 800,
-    fullscreen: true,
+    fullscreen: false,
   });
 
   isDev()
