@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Canvas from './Canvas';
-import space from '../../assets/images/space.jpg';
 
 const Caixa = styled.div<{ $largura: number; $altura: number }>`
     display: flex;
@@ -10,10 +9,10 @@ const Caixa = styled.div<{ $largura: number; $altura: number }>`
     width: ${(props) => props.$largura}px;
     height: ${(props) => props.$altura}px;
     
-    background-image: url(${space});
-    background-size: cover;
+    background-color: black;
     border: 10px solid #1c1c1c;
     border-top: 5px solid #1c1c1c;
+    border-bottom: 5px solid #1c1c1c;
 `;
 
 export const Tela = ({ setIsRun }: isRun) => {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 const Tela = styled.div`
@@ -12,42 +13,85 @@ const Tela = styled.div`
     background-color: #1c1c1c;
 `
 
-const Caixa = styled.div`
-    height: 80%;
-    width: 80%;
-    background-color: #1c6c6c;
-    padding: 10px;
-    border: 3px outset gray;
-    align-items: center;
+const Container = styled.div`
+    height: 90%;
+    width: 90%;
+    background-color: #3c1c6c;
+    border: outset 3px white;
+
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    justify-content: space-around;
+`
+
+const Menu1 = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 100%;
+    width: 50%;
+    gap: 10%;
+
+    h1 {
+        background-color: black;
+        padding: 20px;
+        border: outset 3px white;
+    }
 
     p {
-        align-items: center;
+        width: 100%;
+        word-wrap: break-word;
+        text-align: center;
     }
+`
+
+const Botoes = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `
 
 const Button = styled.div`
-    margin-top: 100px;
-    background-color: #3c1c9c;
+    width: 100%;
     padding: 10px;
+    text-align: center;
     border: 3px outset gray;
 
     &:hover {
-        background-color: #3c1c6c;
+        border: outset;
+        background-color: black;
     }
 `
 
-export const Menu = ({setIsRun}: isRun) => {
+export const Menu = ({ setIsRun }: isRun) => {
+    const [configMenu, setConfigMenu] = useState(false)
 
     return (
         <Tela>
-            <Caixa>
-                <h1>Aero Final</h1>
-                <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-                <Button onClick={() => setIsRun(true)}>Iniciar</Button>
-            </Caixa>
+            <Container>
+                {!configMenu ? (
+                    <Menu1>
+                        <h1>Aero Final</h1>
+                        <p></p>
+                        <Botoes>
+                            <Button onClick={() => setIsRun(true)}>Iniciar</Button>
+                            <Button onClick={() => setConfigMenu(true)}>Configurações</Button>
+                            <Button onClick={() => window.api.send('fechar')}>Sair</Button>
+                        </Botoes>
+                    </Menu1>) : (
+                    <Menu1>
+                        <Botoes>
+                            <Button onClick={() => { window.api.send('maximizar') }}>Janela/Tela Cheia</Button>
+                            <Button>Volume?</Button>
+                            <Button onClick={() => setConfigMenu(false)}>Voltar</Button>
+                        </Botoes>
+                    </Menu1>
+                )}
+            </Container>
         </Tela>
     )
 }

@@ -1,11 +1,7 @@
 import { useRef, useEffect } from "react";
 import Player from "../../classes/Player";
-import styled from "styled-components";
 
-const TelaCanvas = styled.canvas`
-`
-
-const Canvas = ({ $largura, $altura}: tamanhoTela) => {
+const Canvas = ({ $largura, $altura }: tamanhoTela) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
@@ -57,7 +53,7 @@ const Canvas = ({ $largura, $altura}: tamanhoTela) => {
         gameLoop();
     }, []);
 
-    return <TelaCanvas ref={canvasRef} width={$largura} height={$altura} />;
+    return <canvas ref={canvasRef} width={$largura} height={$altura} />;
 };
 
 export default Canvas;

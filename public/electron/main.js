@@ -33,8 +33,10 @@ const createWindow = () => {
     ipcMain.on('maximizar', () => {
         if (win.isFullScreen()) {
             win.setFullScreen(false);
+            win.webContents.send('telacheia', false);
         } else {
             win.setFullScreen(true);
+            win.webContents.send('telacheia', true);
         }
     });
 

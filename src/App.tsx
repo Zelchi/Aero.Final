@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Tela } from './components/jogo/Tela'
-import { BarraJanela } from './components/global/BarraJanela'
-import { useState } from 'react'
+import { BarraJanela } from './components/menu/BarraJanela'
+import { useState, useEffect } from 'react'
 import { Menu } from './components/menu/Menu'
 
 const Jogo = styled.div`
@@ -16,12 +16,19 @@ const Jogo = styled.div`
 
 function App() {
     const [isRun, setIsRun] = useState(false);
+    const [isCheia, setIsCheia] = useState(true);
+
+    useEffect(() => {
+        window.api.receive('telacheia', (b: boolean) => {
+            setIsCheia(b);
+        });
+    }, [isCheia]);
 
     return (
         <Jogo>
-            <BarraJanela />
-            {!isRun && <Menu {...{isRun, setIsRun }} />}
-            {isRun && <Tela {...{isRun, setIsRun }}/>}
+            {!isCheia && <BarraJanela isCheia={isCheia} />}
+            {!isRun && <Menu {...{ isRun, setIsRun }} />}
+            {isRun && <Tela {...{ isRun, setIsRun }} />}
         </Jogo>
     )
 }
