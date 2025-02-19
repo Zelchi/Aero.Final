@@ -31,6 +31,14 @@ const createWindow = () => {
     });
 
     ipcMain.on("maximizar", () => {
+        if (win.isMaximized()) {
+            win.restore();
+        } else {
+            win.maximize();
+        }
+    });
+
+    ipcMain.on("fullscreen", () => {
         if (win.isFullScreen()) {
             win.setFullScreen(false);
             win.webContents.send("sairtelacheia");

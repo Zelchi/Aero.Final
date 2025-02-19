@@ -18,13 +18,13 @@ const gameLoop = (
     if (keys.left && player.position.x >= 1) {
       player.moveLeft();
     }
-    if (keys.right && player.position.x < canvas.width - player.width * 1.2) {
+    if (keys.right && player.position.x < canvas.width - player.width) {
       player.moveRight();
     }
     if (keys.up && player.position.y >= 1) {
       player.moveUp();
     }
-    if (keys.down && player.position.y < canvas.height - player.height * 1.2) {
+    if (keys.down && player.position.y < canvas.height - player.height) {
       player.moveDown();
     }
     player.draw(context);

@@ -102,7 +102,7 @@ export const Menu = ({ setIsRun }: isRun) => {
                         <Botoes>
                             <Button
                                 onClick={() => {
-                                    window.api.send("maximizar");
+                                    window.api.send("fullscreen");
                                 }}
                             >
                                 {tela ? "Modo janela" : "Tela cheia"}
