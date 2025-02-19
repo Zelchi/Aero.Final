@@ -33,10 +33,6 @@ export const keyup = (key: string, player: any, playerSpeed: any) => {
 };
 
 export const miraMouse = (aim: MouseEvent, player: any) => {
-	let angle =
-		Math.atan2(
-			aim.pageX - player.position.x,
-			-(aim.pageY - player.position.y)
-		)
+	let angle = Math.atan2(aim.pageX - player.position.x, -(aim.pageY - player.position.y));
 	player.rotate(angle);
 };

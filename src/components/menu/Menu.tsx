@@ -84,7 +84,7 @@ export const Menu = ({ setIsRun }: isRun) => {
                 <Menu1 $ativo={!configMenu}>
                     <h1>Aero Final</h1>
                     <Botoes>
-                        <Button onClick={() => { setIsRun(true); playSound() }}>Iniciar</Button>
+                        <Button onClick={() => { setIsRun(true) }}>Iniciar</Button>
                         <Button onClick={() => { setConfigMenu(true); playSound() }}>Configurações</Button>
                         <Button onClick={() => { window.api.send("fechar"); playSound() }}>Sair</Button>
                     </Botoes>
