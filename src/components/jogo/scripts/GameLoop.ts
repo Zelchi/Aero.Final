@@ -16,7 +16,6 @@ const gameLoop = (
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-
     context.save();
     context.translate(
       player.position.x + player.width / 2,
@@ -24,7 +23,6 @@ const gameLoop = (
     );
 
     if (keys.left && player.position.x >= 0) {
-
       player.moveLeft();
       context.rotate(-0.15);
     }
