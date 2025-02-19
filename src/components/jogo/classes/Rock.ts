@@ -34,6 +34,9 @@ class Rock {
       this.height
     );
   }
+  atualizarInimigo() {
+    this.position.y += this.speed;
+  }
 }
 
 export default Rock;
