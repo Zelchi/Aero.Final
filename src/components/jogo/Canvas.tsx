@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const Canva = styled.canvas`
 	border: solid 3px white;
-	background-color: #3c3c3c;
+	background-color: #000000;
 	z-index: 5;
 `;
 
