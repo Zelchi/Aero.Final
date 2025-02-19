@@ -1,4 +1,4 @@
-import { PATH_ROCK_IMAGE } from "../utils/Constantes";
+import { PATH_ROCK_IMAGE } from "../../../utils/Constantes";
 
 class Rock {
 	width: number;

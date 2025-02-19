@@ -1,6 +1,6 @@
-import { INITIAL_FRAME, PATH_SPACESHIP_IMAGE } from "../utils/Constantes";
-import { PATH_ENGINE_IMAGE } from "../utils/Constantes";
-import { PATH_ENGINE_SPRITES_IMAGE } from "../utils/Constantes";
+import { INITIAL_FRAME, PATH_SPACESHIP_IMAGE } from "../../../utils/Constantes";
+import { PATH_ENGINE_IMAGE } from "../../../utils/Constantes";
+import { PATH_ENGINE_SPRITES_IMAGE } from "../../../utils/Constantes";
 
 class Player {
     width: number;
