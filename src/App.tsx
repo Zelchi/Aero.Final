@@ -6,6 +6,7 @@ import { Menu } from "./components/menu/Menu";
 import { BackgroundMusic } from "./components/menu/BackgroundMusic";
 import { setFullscreen } from "./store/reducers/fullscreenSlice";
 import { useDispatch } from "react-redux";
+import { Loading } from "./components/menu/FakeLoad";
 
 const Jogo = styled.div`
   display: flex;
@@ -17,6 +18,8 @@ const Jogo = styled.div`
   color: white;
 `;
 
+
+
 function App() {
     const [isRun, setIsRun] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -26,16 +29,19 @@ function App() {
     useEffect(() => {
         window.api.receive("telacheia", () => dispatch(setFullscreen(true)));
         window.api.receive("sairtelacheia", () => dispatch(setFullscreen(false)));
-    }, []);
+    }, [dispatch]);
 
     return (
         <Jogo>
-            <BarraJanela />
-            {!isRun && <>
-                <Menu {...{ isRun, setIsRun }} />
-                <BackgroundMusic />
+            {loading && <Loading {...{ setLoading }} />}
+            {!loading && <>
+                <BarraJanela />
+                {!isRun && <>
+                    <Menu {...{ isRun, setIsRun }} />
+                    <BackgroundMusic />
+                </>}
+                {isRun && <Tela {...{ isRun, setIsRun }} />}
             </>}
-            {isRun && <Tela {...{ isRun, setIsRun }} />}
         </Jogo>
     );
 }
