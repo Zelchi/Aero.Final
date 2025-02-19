@@ -25,7 +25,7 @@ const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
 
   addEventListener("keyup", (e) => {
     const key = e.key.toLowerCase();
-    keyup(key);
+    keyup(key, player, playerSpeed);
   });
 
   addEventListener("mousemove", e => {

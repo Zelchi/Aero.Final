@@ -22,13 +22,20 @@ export const keydown = (key: string, player: any, playerSpeed: number) => {
     }
 }
 
-export const keyup = (key: string) => {
+export const keyup = (key: string, player: any, playerSpeed: any) => {
+    player.speed = playerSpeed;
+
     if (key === "a") keys.left = false;
     if (key === "d") keys.right = false;
     if (key === "w") keys.up = false;
     if (key === "s") keys.down = false;
 }
 
-export const miraMouse = (aim: MouseEvent, player: any,) => {
-    let angle = Math.atan2(aim.pageX - player.position.x, aim.pageY - player.position.y);
+export const miraMouse = (aim: MouseEvent, player: any) => {
+    let angle = Math.atan2(
+        aim.pageY - (player.position.y + player.height / 2),
+        aim.pageX - (player.position.x + player.width / 2)
+    );
+    
+    player.rotate(angle)
 }
