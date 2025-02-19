@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const createWindow = () => {
     const win = new BrowserWindow({
         icon: "./public/invader.png",
-        frame: false,
+        frame: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: true,
@@ -25,6 +25,14 @@ const createWindow = () => {
     });
 
     isDev() ? win.loadURL("http://localhost:5173/") : win.loadFile(path.join(__dirname, "../index.html"));
+
+    let firstRealod = true;
+    win.webContents.on('did-finish-load', () => {
+        if (firstRealod) {
+            win.webContents.reload();
+            firstRealod = false;
+        }
+    });
 
     ipcMain.on("minimizar", () => {
         win.minimize();

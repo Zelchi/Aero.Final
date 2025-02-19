@@ -18,8 +18,6 @@ const Jogo = styled.div`
   color: white;
 `;
 
-
-
 function App() {
     const [isRun, setIsRun] = useState(false);
     const [loading, setLoading] = useState(true);
