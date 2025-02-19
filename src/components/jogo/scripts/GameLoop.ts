@@ -14,8 +14,8 @@ const gameLoop = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
 
         context.save();
         context.translate(
-            player.position.x + player.width / 2,
-            player.position.y + player.height / 2
+            player.position.x + player.largura / 2,
+            player.position.y + player.altura / 2
         );
 
         if (keys.left && player.position.x >= 0) {
@@ -23,19 +23,19 @@ const gameLoop = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
             player.moveLeft();
             context.rotate(-0.15);
         }
-        if (keys.right && player.position.x < canvas.width - player.width) {
+        if (keys.right && player.position.x < canvas.width - player.largura) {
             player.moveRight();
             context.rotate(0.15);
         }
         if (keys.up && player.position.y >= 1) {
             player.moveUp();
         }
-        if (keys.down && player.position.y < canvas.height - player.height) {
+        if (keys.down && player.position.y < canvas.height - player.altura) {
             player.moveDown();
         }
         context.translate(
-            -player.position.x - player.width / 2,
-            -player.position.y - player.height / 2
+            -player.position.x - player.largura / 2,
+            -player.position.y - player.altura / 2
         );
 
         player.draw(context);

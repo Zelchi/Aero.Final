@@ -6,11 +6,11 @@ import {
 } from "../../../utils/Constantes";
 
 class Player {
-    width: number;
-    height: number;
+    largura: number;
+    altura: number;
     position: { x: number; y: number };
-    speed: number;
-    rotation: number;
+    velocidade: number;
+    angulo: number;
     engineImage: HTMLImageElement;
     engineSprites: HTMLImageElement;
     frameConter: number;
@@ -18,24 +18,24 @@ class Player {
     sx: number;
     hitbox: { x: number; y: number; radius: number };
 
-    constructor(Width: number, Height: number) {
-        this.width = Height * 0.1;
-        this.height = Height * 0.1;
-        this.speed = Height * 0.007;
-        this.rotation = 0;
+    constructor(larguraTela: number, alturaTela: number) {
+        this.largura = alturaTela * 0.1;
+        this.altura = alturaTela * 0.1;
+        this.velocidade = alturaTela * 0.007;
+        this.angulo = 0;
         this.sx = 0;
         this.frameConter = INITIAL_FRAME;
         this.position = {
-            x: Width / 2 - this.width / 2,
-            y: Height - this.height - 30,
+            x: larguraTela / 2 - this.largura / 2,
+            y: alturaTela - this.altura - 30,
         };
         this.image = this.getImg(PATH_SPACESHIP_IMAGE);
         this.engineImage = this.getImg(PATH_ENGINE_IMAGE);
         this.engineSprites = this.getImg(PATH_ENGINE_SPRITES_IMAGE);
         this.hitbox = {
-            x: this.position.x + this.width / 2,
-            y: this.position.y + this.height / 2,
-            radius: Math.min(this.width, this.height) / 2,
+            x: this.position.x + this.largura / 2,
+            y: this.position.y + this.altura / 2,
+            radius: Math.min(this.largura, this.altura) / 2,
         };
     }
 
@@ -46,42 +46,42 @@ class Player {
     }
 
     rotate(angle: number) {
-        this.rotation = angle;
+        this.angulo = angle;
     }
 
     moveLeft() {
-        this.position.x -= this.speed;
+        this.position.x -= this.velocidade;
         this.updateHitbox();
     }
     moveRight() {
-        this.position.x += this.speed;
+        this.position.x += this.velocidade;
         this.updateHitbox();
     }
     moveUp() {
-        this.position.y -= this.speed;
+        this.position.y -= this.velocidade;
         this.updateHitbox();
     }
     moveDown() {
-        this.position.y += this.speed;
+        this.position.y += this.velocidade;
         this.updateHitbox();
     }
 
     updateHitbox() {
-        this.hitbox.x = this.position.x + this.width / 2;
-        this.hitbox.y = this.position.y + this.height / 2;
+        this.hitbox.x = this.position.x + this.largura / 2;
+        this.hitbox.y = this.position.y + this.altura / 2;
     }
 
     draw(context: CanvasRenderingContext2D) {
         context.save();
         context.translate(this.hitbox.x, this.hitbox.y);
-        context.rotate(this.rotation);
+        context.rotate(this.angulo);
         context.translate(-this.hitbox.x, -this.hitbox.y);
 
         // Acho que é a nave :)
-        context.fillRect(this.position.x, this.position.y, this.width, this.height);
-        context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
-        context.drawImage(this.engineSprites, this.sx, 0, 48, 48, this.position.x, this.position.y + 10, this.width, this.height);
-        context.drawImage(this.engineImage, this.position.x, this.position.y + 5, this.width, this.height);
+        context.fillRect(this.position.x, this.position.y, this.largura, this.altura);
+        context.drawImage(this.image, this.position.x, this.position.y, this.largura, this.altura);
+        context.drawImage(this.engineSprites, this.sx, 0, 48, 48, this.position.x, this.position.y + 10, this.largura, this.altura);
+        context.drawImage(this.engineImage, this.position.x, this.position.y + 5, this.largura, this.altura);
 
         // Hitbox
         context.strokeStyle = 'red';
