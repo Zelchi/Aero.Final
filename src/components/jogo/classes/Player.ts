@@ -77,13 +77,12 @@ class Player {
         context.rotate(this.angulo);
         context.translate(-this.hitbox.x, -this.hitbox.y);
 
-        // Acho que é a nave :)
-        context.fillRect(this.position.x, this.position.y, this.largura, this.altura);
+        // É a nave :)
         context.drawImage(this.image, this.position.x, this.position.y, this.largura, this.altura);
         context.drawImage(this.engineSprites, this.sx, 0, 48, 48, this.position.x, this.position.y + 10, this.largura, this.altura);
         context.drawImage(this.engineImage, this.position.x, this.position.y + 5, this.largura, this.altura);
 
-        // Hitbox
+        // Linha hitbox
         context.strokeStyle = 'red';
         context.beginPath();
         context.arc(this.hitbox.x, this.hitbox.y, this.hitbox.radius, 0, Math.PI * 2);
