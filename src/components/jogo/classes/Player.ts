@@ -77,51 +77,19 @@ class Player {
         context.rotate(this.rotation);
         context.translate(-this.hitbox.x, -this.hitbox.y);
 
-        context.fillRect(
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height
-        );
-        context.drawImage(
-            this.image,
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height
-        );
-        context.drawImage(
-            this.engineSprites,
-            this.sx,
-            0,
-            48,
-            48,
-            this.position.x,
-            this.position.y + 10,
-            this.width,
-            this.height
-        );
-        context.drawImage(
-            this.engineImage,
-            this.position.x,
-            this.position.y + 5,
-            this.width,
-            this.height
-        );
+        // Acho que é a nave :)
+        context.fillRect(this.position.x, this.position.y, this.width, this.height);
+        context.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+        context.drawImage(this.engineSprites, this.sx, 0, 48, 48, this.position.x, this.position.y + 10, this.width, this.height);
+        context.drawImage(this.engineImage, this.position.x, this.position.y + 5, this.width, this.height);
 
+        // Hitbox
         context.strokeStyle = 'red';
         context.beginPath();
-        context.arc(
-            this.hitbox.x,
-            this.hitbox.y,
-            this.hitbox.radius,
-            0,
-            Math.PI * 2
-        );
+        context.arc(this.hitbox.x, this.hitbox.y, this.hitbox.radius, 0, Math.PI * 2);
         context.stroke();
 
         context.restore();
-
         this.updateSprite();
     }
 
