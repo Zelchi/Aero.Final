@@ -7,7 +7,7 @@ export const keys = {
 	down: false,
 };
 
-export const keydown = (key: string, player: any, playerSpeed: number) => {
+export const keydown = (key: string, player: Player, playerSpeed: number) => {
 	if (key === "a") keys.left = true;
 	if (key === "d") keys.right = true;
 	if (key === "w") keys.up = true;
@@ -19,9 +19,9 @@ export const keydown = (key: string, player: any, playerSpeed: number) => {
 		(keys.down && keys.left) ||
 		(keys.down && keys.right)
 	) {
-		player.speed = playerSpeed * 0.7071;
+		player.velocidade = playerSpeed * 0.7071;
 	} else {
-		player.speed = playerSpeed;
+		player.velocidade = playerSpeed;
 	}
 };
 
@@ -35,6 +35,6 @@ export const keyup = (key: string, player: Player, playerVelocidade: any) => {
 };
 
 export const miraMouse = (aim: MouseEvent, player: Player) => {
-	let angle = Math.atan2(aim.pageX - (player.position.x + player.altura), -(aim.pageY - (player.position.y + player.altura)));
+	let angle = Math.atan2(aim.pageX - (player.position.x + player.largura * 1.3), -(aim.pageY - (player.position.y + player.largura * 1.3)));
 	player.rotate(angle);
 };
