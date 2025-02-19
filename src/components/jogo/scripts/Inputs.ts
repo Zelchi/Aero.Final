@@ -36,6 +36,6 @@ export const miraMouse = (aim: MouseEvent, player: any) => {
         aim.pageY - (player.position.y + player.height / 2),
         aim.pageX - (player.position.x + player.width / 2)
     );
-    
+
     player.rotate(angle)
 }
