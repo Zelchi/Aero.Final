@@ -28,11 +28,11 @@ class Player {
     this.engineSprites = this.getImg(PATH_ENGINE_SPRITES_IMAGE);
   }
 
-  getImg(path: string) {
-    const image = new Image();
-    image.src = path;
-    return image;
-  }
+    getImg(path: string) {
+        const image = new Image();
+        image.src = path;
+        return image;
+    }
 
   moveLeft() {
     this.position.x -= this.speed;

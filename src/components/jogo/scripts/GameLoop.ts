@@ -16,6 +16,7 @@ const gameLoop = (
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+
     context.save();
     context.translate(
       player.position.x + player.width / 2,
@@ -23,17 +24,18 @@ const gameLoop = (
     );
 
     if (keys.left && player.position.x >= 0) {
+
       player.moveLeft();
       context.rotate(-0.15);
     }
-    if (keys.right && player.position.x < canvas.width - player.width - 10) {
+    if (keys.right && player.position.x < canvas.width - player.width) {
       player.moveRight();
       context.rotate(0.15);
     }
-    if (keys.up && player.position.y >= 0) {
+    if (keys.up && player.position.y >= 1) {
       player.moveUp();
     }
-    if (keys.down && player.position.y < canvas.height - player.height - 10) {
+    if (keys.down && player.position.y < canvas.height - player.height) {
       player.moveDown();
     }
     context.translate(

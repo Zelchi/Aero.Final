@@ -2,13 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import Player from "../../classes/Player";
 import Rock from "../../classes/Rock";
 import gameLoop from "./scripts/GameLoop";
+import styled from "styled-components";
+
+const Canva = styled.canvas`
+    border: solid 3px white;
+    background-color: #3c3c3c;
+    z-index: 3;
+`;
 
 const keys = {
-  left: false,
-  right: false,
-  up: false,
-  down: false,
+    left: false,
+    right: false,
+    up: false,
+    down: false,
 };
+
 
 addEventListener("keydown", (e) => {
   const key = e.key.toLowerCase();
