@@ -2,9 +2,10 @@ interface Window {
     api: render;
 }
 
-type tamanhoTela = {
+type Canvas = {
     $largura: number,
     $altura: number,
+    setIsRun: (bool: boolean) => void,
 }
 
 type isRun = {

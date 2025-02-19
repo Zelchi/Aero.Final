@@ -38,13 +38,14 @@ class Player {
   }
   rotationPlayer() {}
   draw(context: CanvasRenderingContext2D) {
+    context.fillStyle = "orange";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
     context.drawImage(
       this.image,
-      this.position.x,
-      this.position.y,
-      this.width,
-      this.height
+      this.position.x - 50,
+      this.position.y - 50,
+      this.width + 100,
+      this.height + 100,
     );
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import styled from "styled-components";
 import Canvas from "./Canvas";
 
@@ -16,29 +16,30 @@ const Caixa = styled.div<{ $largura: number; $altura: number }>`
 `;
 
 export const Tela = ({ setIsRun }: isRun) => {
-  const [tamanhoTela, setTamanhoTela] = useState({
-    largura: window.innerWidth,
-    altura: window.innerHeight,
-  });
+    const [tamanhoTela, setTamanhoTela] = useState({
+        largura: window.innerWidth,
+        altura: window.innerHeight,
+    });
 
-  const handleResize = () => {
-    setTamanhoTela({ largura: window.innerWidth, altura: window.innerHeight });
-    setIsRun(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
+    const handleResize = () => {
+        setTamanhoTela({ largura: window.innerWidth, altura: window.innerHeight });
+        setIsRun(false);
     };
-  }, [window.innerWidth, window.innerHeight]);
 
-  return (
-    <Caixa $largura={tamanhoTela.largura} $altura={tamanhoTela.altura}>
-      <Canvas
-        $largura={tamanhoTela.largura - 50}
-        $altura={tamanhoTela.altura - 50}
-      />
-    </Caixa>
-  );
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [window.innerWidth, window.innerHeight]);
+
+    return (
+        <Caixa $largura={tamanhoTela.largura} $altura={tamanhoTela.altura}>
+            <Canvas
+                $largura={tamanhoTela.largura - 50}
+                $altura={tamanhoTela.altura - 50}
+                setIsRun={setIsRun}
+            />
+        </Caixa>
+    );
 };
