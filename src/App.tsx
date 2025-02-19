@@ -19,6 +19,7 @@ const Jogo = styled.div`
 
 function App() {
     const [isRun, setIsRun] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -29,6 +30,7 @@ function App() {
 
     return (
         <Jogo>
+
             <BarraJanela />
             {!isRun && <>
                 <Menu {...{ isRun, setIsRun }} />
