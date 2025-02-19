@@ -1,17 +1,20 @@
 import { PATH_SPACESHIP_IMAGE } from "../utils/Constantes";
+
 class Player {
     width: number;
     height: number;
     position: { x: number; y: number };
     speed: number;
+    rotation: number;
     image: HTMLImageElement;
-    constructor(canvasWidth: number, canvasHeight: number) {
-        this.width = 30;
-        this.height = 30;
-        this.speed = 10;
+    constructor(Width: number, Height: number) {
+        this.width = Height * 0.05;
+        this.height = Height * 0.05;
+        this.speed = Height * 0.01;
+        this.rotation = 0;
         this.position = {
-            x: canvasWidth / 2 - this.width / 2,
-            y: canvasHeight - this.height - 30,
+            x: Width / 2 - this.width / 2,
+            y: Height - this.height - 30,
         };
         this.image = this.getImg(PATH_SPACESHIP_IMAGE);
     }
@@ -34,8 +37,17 @@ class Player {
     moveDown() {
         this.position.y += this.speed;
     }
+    rotationPlayer() { }
     draw(context: CanvasRenderingContext2D) {
-        context.drawImage(this.image, this.position.x, this.position.y);
+        context.fillStyle = "orange";
+        context.fillRect(this.position.x, this.position.y, this.width, this.height);
+        context.drawImage(
+            this.image,
+            this.position.x - 20,
+            this.position.y - 20,
+            this.width + 40,
+            this.height + 40,
+        );
     }
 }
 

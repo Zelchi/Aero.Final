@@ -1,8 +1,43 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Player from "../../classes/Player";
+import Rock from "../../classes/Rock";
+import gameLoop from "./scripts/GameLoop";
+import styled from "styled-components";
 
-const Canvas = ({ $largura, $altura }: tamanhoTela) => {
+const Canva = styled.canvas`
+    border: solid 3px white;
+    background-color: #3c3c3c;
+    z-index: 3;
+`;
+
+const keys = {
+    left: false,
+    right: false,
+    up: false,
+    down: false,
+};
+
+const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
+    const [player] = useState(new Player($largura, $altura));
+    const [rock] = useState(new Rock($largura, $altura));
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    addEventListener("keydown", (e) => {
+        const key = e.key.toLowerCase();
+        if (key === "a") keys.left = true;
+        if (key === "d") keys.right = true;
+        if (key === "w") keys.up = true;
+        if (key === "s") keys.down = true;
+        if (key === "escape") setIsRun(false);
+    });
+
+    addEventListener("keyup", (e) => {
+        const key = e.key.toLowerCase();
+        if (key === "a") keys.left = false;
+        if (key === "d") keys.right = false;
+        if (key === "w") keys.up = false;
+        if (key === "s") keys.down = false;
+    });
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -10,50 +45,10 @@ const Canvas = ({ $largura, $altura }: tamanhoTela) => {
         const context = canvas.getContext("2d");
         if (!context) return;
 
-        const player = new Player(canvas.width, canvas.height);
-        const keys = {
-            left: false,
-            right: false,
-            up: false,
-            down: false,
-        };
-        const gameLoop = () => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            if (keys.left && player.position.x >= 0) {
-                player.moveLeft();
-            }
-            if (keys.right && player.position.x < canvas.width - player.width - 10) {
-                player.moveRight();
-            }
-            if (keys.up && player.position.y >= 0) {
-                player.moveUp();
-            }
-            if (keys.down && player.position.y < canvas.height - player.height - 10) {
-                player.moveDown();
-            }
-            player.draw(context);
-            requestAnimationFrame(gameLoop);
-        };
+        gameLoop(canvas, context, keys, player, rock);
+    }, [player, canvasRef]);
 
-        addEventListener("keydown", (e) => {
-            const key = e.key.toLowerCase();
-
-            if (key === "a") keys.left = true;
-            if (key === "d") keys.right = true;
-            if (key === "w") keys.up = true;
-            if (key === "s") keys.down = true;
-        });
-        addEventListener("keyup", (e) => {
-            const key = e.key.toLowerCase();
-            if (key === "a") keys.left = false;
-            if (key === "d") keys.right = false;
-            if (key === "w") keys.up = false;
-            if (key === "s") keys.down = false;
-        });
-        gameLoop();
-    }, []);
-
-    return <canvas ref={canvasRef} width={$largura} height={$altura} />;
+    return <Canva ref={canvasRef} width={$largura} height={$altura} />;
 };
 
 export default Canvas;
