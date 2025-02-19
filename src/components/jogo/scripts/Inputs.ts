@@ -1,3 +1,5 @@
+import { Player } from '../classes/Player'
+
 export const keys = {
 	left: false,
 	right: false,
@@ -23,8 +25,8 @@ export const keydown = (key: string, player: any, playerSpeed: number) => {
 	}
 };
 
-export const keyup = (key: string, player: any, playerSpeed: any) => {
-	player.speed = playerSpeed;
+export const keyup = (key: string, player: Player, playerVelocidade: any) => {
+	player.velocidade = playerVelocidade;
 
 	if (key === "a") keys.left = false;
 	if (key === "d") keys.right = false;
@@ -32,7 +34,7 @@ export const keyup = (key: string, player: any, playerSpeed: any) => {
 	if (key === "s") keys.down = false;
 };
 
-export const miraMouse = (aim: MouseEvent, player: any) => {
+export const miraMouse = (aim: MouseEvent, player: Player) => {
 	let angle = Math.atan2(aim.pageX - (player.position.x + player.altura), -(aim.pageY - (player.position.y + player.altura)));
 	player.rotate(angle);
 };

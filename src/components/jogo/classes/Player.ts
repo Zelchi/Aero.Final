@@ -5,7 +5,9 @@ import {
   FRAME_INICIAL,
 } from "../../../utils/Constantes";
 
-class Player {
+
+
+export class Player {
     largura: number;
     altura: number;
     position: { x: number; y: number };
