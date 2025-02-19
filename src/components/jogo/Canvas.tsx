@@ -29,12 +29,12 @@ const Canvas = ({ $largura, $altura }: tamanhoTela) => {
   const [player] = useState(new Player($largura, $altura));
   const [rock] = useState(new Rock($largura, $altura));
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext("2d");
     if (!context) return;
+    context.imageSmoothingEnabled = false;
 
     gameLoop(canvas, context, keys, player, rock);
   }, [player, canvasRef]);
