@@ -1,6 +1,9 @@
-import { INITIAL_FRAME, PATH_SPACESHIP_IMAGE } from "../../../utils/Constantes";
-import { PATH_ENGINE_IMAGE } from "../../../utils/Constantes";
-import { PATH_ENGINE_SPRITES_IMAGE } from "../../../utils/Constantes";
+import {
+	INITIAL_FRAME,
+	PATH_SPACESHIP_IMAGE,
+	PATH_ENGINE_IMAGE,
+	PATH_ENGINE_SPRITES_IMAGE,
+} from "../../../utils/Constantes";
 
 class Player {
 	width: number;
@@ -51,28 +54,39 @@ class Player {
 	moveDown() {
 		this.position.y += this.speed;
 	}
-
+	rotationPlayer() {}
 	draw(context: CanvasRenderingContext2D) {
-		context.translate(
-			this.position.x - this.width,
-			this.position.y - this.height
+		context.fillRect(
+			this.position.x,
+			this.position.y,
+			this.width,
+			this.height
 		);
-		context.rotate(this.rotation);
-		context.translate(-this.width / 2, -this.height / 2);
-
-		context.drawImage(this.image, 0, 0, this.width, this.height);
+		context.drawImage(
+			this.image,
+			this.position.x,
+			this.position.y,
+			this.width,
+			this.height
+		);
 		context.drawImage(
 			this.engineSprites,
 			this.sx,
 			0,
 			48,
 			48,
-			0,
-			10,
+			this.position.x,
+			this.position.y + 10,
 			this.width,
 			this.height
 		);
-		context.drawImage(this.engineImage, 0, 5, this.width, this.height);
+		context.drawImage(
+			this.engineImage,
+			this.position.x,
+			this.position.y + 5,
+			this.width,
+			this.height
+		);
 		this.updateSprite();
 	}
 	updateSprite() {

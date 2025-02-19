@@ -26,13 +26,13 @@ const createWindow = () => {
 
     isDev() ? win.loadURL("http://localhost:5173/") : win.loadFile(path.join(__dirname, "../index.html"));
 
-    let firstRealod = true;
-    win.webContents.on('did-finish-load', () => {
-        if (firstRealod) {
-            win.webContents.reload();
-            firstRealod = false;
-        }
-    });
+    // let firstRealod = true;
+    // win.webContents.on('did-finish-load', () => {
+    //     if (firstRealod) {
+    //         win.webContents.reload();
+    //         firstRealod = false;
+    //     }
+    // });
 
     ipcMain.on("minimizar", () => {
         win.minimize();
@@ -64,9 +64,9 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     createWindow();
-    globalShortcut.register('CommandOrControl+R', () => {
-        console.log('Batata');
-    });
+    // globalShortcut.register('CommandOrControl+R', () => {
+    //     console.log('Batata');
+    // });
     app.on("activate", () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });

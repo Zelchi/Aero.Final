@@ -27,9 +27,8 @@ const Progress = styled.div<{ $progress: number }>`
     transition: width 0.3s;
 `;
 
-
 export const Loading = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState<number>(0);
 
     useEffect(() => {
