@@ -5,7 +5,7 @@ import menu from "../../assets/audios/menu.mp3";
 
 export const BackgroundMusic = () => {
     const { volume: vol } = useSelector((state: RootState) => state.volumeState);
-    const volume = Number(vol) / 100;
+    const volume = Number(vol) / 500;
 
     const audioRef = useRef<HTMLAudioElement>(null);
 

@@ -30,7 +30,6 @@ function App() {
 
     return (
         <Jogo>
-
             <BarraJanela />
             {!isRun && <>
                 <Menu {...{ isRun, setIsRun }} />
