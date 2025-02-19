@@ -15,16 +15,16 @@ const gameLoop = (
 ) => {
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    if (keys.left && player.position.x >= 0) {
+    if (keys.left && player.position.x >= 1) {
       player.moveLeft();
     }
-    if (keys.right && player.position.x < canvas.width - player.width - 10) {
+    if (keys.right && player.position.x < canvas.width - player.width * 1.2) {
       player.moveRight();
     }
-    if (keys.up && player.position.y >= 0) {
+    if (keys.up && player.position.y >= 1) {
       player.moveUp();
     }
-    if (keys.down && player.position.y < canvas.height - player.height - 10) {
+    if (keys.down && player.position.y < canvas.height - player.height * 1.2) {
       player.moveDown();
     }
     player.draw(context);

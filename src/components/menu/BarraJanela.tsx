@@ -9,6 +9,7 @@ const alturaBotao = '20px';
 
 const Barra = styled.div<{ $visible: boolean }>`
     width: 100vw;
+    height: 20px;
     display: ${({ $visible }) => (!$visible ? 'flex' : 'none')};
     flex-direction: row;
     justify-content: space-between;
@@ -18,6 +19,7 @@ const Barra = styled.div<{ $visible: boolean }>`
     color: white;
     -webkit-app-region: drag;
     margin-top: 5px;
+    margin-bottom: 5px;
 `;
 
 const Icon = styled.img`

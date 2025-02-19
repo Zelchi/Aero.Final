@@ -1,18 +1,19 @@
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, useEffect } from "react";
+import { filtroRetro } from "../../utils/FiltroRetro";
 import styled from "styled-components";
 import Canvas from "./Canvas";
 
-const Caixa = styled.div<{ $largura: number; $altura: number }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: ${(props) => props.$largura}px;
-  height: ${(props) => props.$altura}px;
+const Caixa = styled.div`
+    height: 100%;
+    width: 100%;
 
-  background-color: black;
-  border: 10px solid #1c1c1c;
-  border-top: 5px solid #1c1c1c;
-  border-bottom: 5px solid #1c1c1c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ${filtroRetro()};
+
+    background-color: #1c1c1c;
 `;
 
 export const Tela = ({ setIsRun }: isRun) => {
@@ -34,10 +35,10 @@ export const Tela = ({ setIsRun }: isRun) => {
     }, [window.innerWidth, window.innerHeight]);
 
     return (
-        <Caixa $largura={tamanhoTela.largura} $altura={tamanhoTela.altura}>
+        <Caixa>
             <Canvas
-                $largura={tamanhoTela.largura - 50}
-                $altura={tamanhoTela.altura - 50}
+                $largura={tamanhoTela.largura - 150}
+                $altura={tamanhoTela.altura - 150}
                 setIsRun={setIsRun}
             />
         </Caixa>

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, globalShortcut } from "electron";
 import { fileURLToPath } from "url";
 import { isDev } from "./utils.js";
 import path from "path";
@@ -45,9 +45,12 @@ const createWindow = () => {
     });
 };
 
+
 app.whenReady().then(() => {
     createWindow();
-
+    globalShortcut.register('CommandOrControl+R', () => {
+        console.log('Batata');
+    });
     app.on("activate", () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
