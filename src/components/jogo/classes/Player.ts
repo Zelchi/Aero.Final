@@ -54,7 +54,7 @@ class Player {
 	moveDown() {
 		this.position.y += this.speed;
 	}
-	rotationPlayer() {}
+
 	draw(context: CanvasRenderingContext2D) {
 		context.fillRect(
 			this.position.x,
@@ -87,6 +87,7 @@ class Player {
 			this.width,
 			this.height
 		);
+
 		this.updateSprite();
 	}
 	updateSprite() {
