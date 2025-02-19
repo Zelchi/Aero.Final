@@ -1,31 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Volume } from "./Volume";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import styled from "styled-components";
+import space from "../../assets/images/space.gif";
+import { filtroRetro } from "../../utils/FiltroRetro";
 
 const Tela = styled.div`
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  background-color: #1c1c1c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1c1c1c;
+    ${filtroRetro()};
 `;
 
 const Container = styled.div`
-  height: 90%;
-  width: 90%;
-  background-color: #000000;
-  border: outset 3px white;
+    height: 90%;
+    width: 90%;
+    background-image: url(${space});
+    background-size: cover;
+    background-color: #000000;
+    border: outset 3px white;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `;
 
 const Menu1 = styled.div`
@@ -33,6 +37,7 @@ const Menu1 = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 5;
 
   height: 100%;
   width: 50%;
@@ -67,6 +72,7 @@ const Button = styled.div`
   text-align: center;
   border: 3px outset gray;
   border-radius: 10px;
+  background-color: black;
 
   &:hover {
     border: outset;
