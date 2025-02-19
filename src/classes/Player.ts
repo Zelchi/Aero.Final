@@ -1,4 +1,4 @@
-import { PATH_SPACESHIP_IMAGE } from "../utils/Constantes";
+import { INITIAL_FRAME, PATH_SPACESHIP_IMAGE } from "../utils/Constantes";
 import { PATH_ENGINE_IMAGE } from "../utils/Constantes";
 import { PATH_ENGINE_SPRITES_IMAGE } from "../utils/Constantes";
 class Player {
@@ -15,10 +15,10 @@ class Player {
   constructor(Width: number, Height: number) {
     this.width = Height * 0.2;
     this.height = Height * 0.2;
-    this.speed = Height * 0.01;
+    this.speed = Height * 0.007;
     this.rotation = 0;
     this.sx = 0;
-    this.frameConter = 5;
+    this.frameConter = INITIAL_FRAME;
     this.position = {
       x: Width / 2 - this.width / 2,
       y: Height - this.height - 30,
@@ -63,7 +63,7 @@ class Player {
       48,
       48,
       this.position.x,
-      this.position.y + 12,
+      this.position.y + 10,
       this.width,
       this.height
     );
@@ -83,7 +83,7 @@ class Player {
       } else {
         this.sx += 48;
       }
-      this.frameConter = 5;
+      this.frameConter = INITIAL_FRAME;
     }
     this.frameConter--;
   }
