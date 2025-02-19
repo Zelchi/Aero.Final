@@ -7,13 +7,8 @@ type Keys = {
     up: boolean;
     down: boolean;
 };
-const gameLoop = (
-    canvas: HTMLCanvasElement,
-    context: CanvasRenderingContext2D,
-    keys: Keys,
-    player: Player,
-    rock: Rock
-) => {
+
+const gameLoop = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, keys: Keys, player: Player, rock: Rock) => {
     function draw() {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
