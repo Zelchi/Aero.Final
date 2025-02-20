@@ -6,6 +6,7 @@ import { Rock } from "./classes/Rock";
 import styled from "styled-components";
 
 const Canva = styled.canvas`
+  cursor: crosshair;
   border: solid 3px white;
   background-color: #2c2c2c;
   z-index: 5;
@@ -18,34 +19,35 @@ const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
     const [playerVelocidade] = useState(player.velocidade);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    addEventListener("keydown", (e) => {
-        const key = e.key.toLowerCase();
-        keydown(key, player, playerVelocidade);
-        if (key === "escape") setIsRun(false);
-    });
+  addEventListener("keydown", (e) => {
+    const key = e.key.toLowerCase();
+    keydown(key, player, playerVelocidade);
+    if (key === "escape") setIsRun(false);
+  });
 
-    addEventListener("keyup", (e) => {
-        const key = e.key.toLowerCase();
-        keyup(key, player, playerVelocidade);
-    });
+  addEventListener("keyup", (e) => {
+    const key = e.key.toLowerCase();
+    keyup(key, player, playerVelocidade);
+  });
 
-    addEventListener("mousemove", (e) => {
-        const aim = e;
-        miraMouse(aim, player);
-    });
+  addEventListener("mousemove", (e) => {
+    const aim = e;
+    miraMouse(aim, player);
+  });
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const context = canvas.getContext("2d");
-        if (!context) return;
-        context.imageSmoothingEnabled = false;
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    context.imageSmoothingEnabled = false;
 
         atualizaInimigos(tela, context, rock);
         atualizaJogador(tela, context, player);
     }, []);
 
-    return <Canva ref={canvasRef} width={$largura} height={$altura} />;
+  return <Canva ref={canvasRef} width={$largura} height={$altura} />;
 };
 
 export default Canvas;
