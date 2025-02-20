@@ -3,7 +3,7 @@ import { Player } from "../classes/Player";
 import { Rock } from "../classes/Rock";
 
 export const atualizaJogador = (tela: TamanhoTela, context: CanvasRenderingContext2D, player: Player) => {
-    function draw() {
+    function draw() { //Pegar o o tempo e colocar como o modificador de velocidade
         context.clearRect(0, 0, tela.largura, tela.altura);
         context.save();
         context.translate(
@@ -11,7 +11,6 @@ export const atualizaJogador = (tela: TamanhoTela, context: CanvasRenderingConte
             player.position.y + player.altura / 2
         );
         if (keys.left && player.position.x >= 0) {
-
             player.moveLeft();
         }
         if (keys.right && player.position.x < tela.largura - player.largura) {
