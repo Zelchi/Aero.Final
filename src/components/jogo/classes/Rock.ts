@@ -9,10 +9,10 @@ class Rock {
   constructor(telaHeight: number) {
     this.width = telaHeight * 0.04;
     this.height = telaHeight * 0.04;
-    this.speed = telaHeight * 0.01;
+    this.speed = telaHeight * 0.005;
     this.position = {
-      x: this.randon(50, 700),
-      y: this.randon(50, 700),
+      x: this.randon(0, 700),
+      y: 0,
     };
     this.image = this.getImg(CAMINHO_PEDRA_IMAGE);
   }
