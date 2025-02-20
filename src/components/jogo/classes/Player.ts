@@ -35,7 +35,7 @@ export class Player {
         this.hitbox = {
             x: this.position.x + this.largura / 2,
             y: this.position.y + this.altura / 2,
-            radius: Math.min(this.largura, this.altura) / 2,
+            radius: Math.min(this.largura, this.altura) / 4,
         };
     }
 
