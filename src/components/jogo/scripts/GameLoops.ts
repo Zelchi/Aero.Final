@@ -13,11 +13,9 @@ export const atualizaJogador = (tela: TamanhoTela, context: CanvasRenderingConte
         if (keys.left && player.position.x >= 0) {
 
             player.moveLeft();
-            context.rotate(-0.15);
         }
         if (keys.right && player.position.x < tela.largura - player.largura) {
             player.moveRight();
-            context.rotate(0.15);
         }
         if (keys.up && player.position.y >= 1) {
             player.moveUp();

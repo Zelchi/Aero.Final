@@ -11,8 +11,8 @@ export class Rock {
         this.altura = Math.min(larguraTela, alturaTela) * 0.1;
         this.velocidade = alturaTela * 0.007;
         this.position = {
-            x: this.randon(0, 700),
-            y: 0,
+            x: this.spawn(0, 700),
+            y: 500,
         };
         this.image = this.getImg(CAMINHO_PEDRA_IMAGE);
     }
@@ -21,7 +21,7 @@ export class Rock {
         image.src = path;
         return image;
     }
-    randon(min: number, max: number) {
+    spawn(min: number, max: number) {
         return Math.random() * (max - min) + min;
     }
     draw(context: CanvasRenderingContext2D) {
