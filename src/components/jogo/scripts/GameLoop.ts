@@ -13,12 +13,13 @@ const gameLoop = (
   context: CanvasRenderingContext2D,
   keys: Keys,
   player: Player,
-  rock: Rock
+  rocks: Rock[]
 ) => {
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.save();
+
     context.translate(
       player.position.x + player.largura / 2,
       player.position.y + player.altura / 2
@@ -47,8 +48,10 @@ const gameLoop = (
 
     context.restore();
 
-    rock.atualizarInimigo();
-    rock.draw(context);
+    rocks.forEach((rock) => {
+      rock.atualizarRock();
+      rock.draw(context);
+    });
 
     requestAnimationFrame(draw);
   }

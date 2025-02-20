@@ -15,8 +15,12 @@ const Canva = styled.canvas`
 const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
   const [player] = useState(new Player($largura, $altura));
   const [playerVelocidade] = useState(player.velocidade);
-  const [rock] = useState(new Rock($largura));
+  const [rocks, setRocks] = useState<Rock[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const addRock = () => {
+    setRocks((prevRocks) => [...prevRocks, new Rock($altura, $largura)]);
+  };
 
   addEventListener("keydown", (e) => {
     const key = e.key.toLowerCase();
@@ -42,8 +46,11 @@ const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
 
     context.imageSmoothingEnabled = false;
 
-    gameLoop(canvas, context, keys, player, rock);
-  }, [player, canvasRef]);
+    gameLoop(canvas, context, keys, player, rocks);
+
+    const interval = setInterval(() => addRock(), 2000);
+    return () => clearInterval(interval);
+  }, [player, canvasRef, rocks]);
 
   return <Canva ref={canvasRef} width={$largura} height={$altura} />;
 };
