@@ -19,7 +19,7 @@ export class Player {
     hitbox: { x: number; y: number; radius: number };
 
     constructor(larguraTela: number, alturaTela: number) {
-        this.largura = Math.min(larguraTela, alturaTela) * 0.1; // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        this.largura = Math.min(larguraTela, alturaTela) * 0.1;
         this.altura = Math.min(larguraTela, alturaTela) * 0.1;
         this.velocidade = alturaTela * 0.007;
         this.angulo = 0;
@@ -35,7 +35,7 @@ export class Player {
         this.hitbox = {
             x: this.position.x + this.largura / 2,
             y: this.position.y + this.altura / 2,
-            radius: Math.min(this.largura, this.altura) / 2,
+            radius: Math.min(this.largura, this.altura) / 4,
         };
     }
 
@@ -104,5 +104,3 @@ export class Player {
         this.frameConter--;
     }
 }
-
-export default Player;

@@ -7,7 +7,7 @@ export const keys = {
 	down: false,
 };
 
-export const keydown = (key: string, player: Player, playerSpeed: number) => {
+export const keydown = (key: string, player: Player, playerVelocidade: number) => {
 	if (key === "a") keys.left = true;
 	if (key === "d") keys.right = true;
 	if (key === "w") keys.up = true;
@@ -19,9 +19,9 @@ export const keydown = (key: string, player: Player, playerSpeed: number) => {
 		(keys.down && keys.left) ||
 		(keys.down && keys.right)
 	) {
-		player.velocidade = playerSpeed * 0.7071;
+		player.velocidade = playerVelocidade * 0.7071;
 	} else {
-		player.velocidade = playerSpeed;
+		player.velocidade = playerVelocidade;
 	}
 };
 
