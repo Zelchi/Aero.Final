@@ -6,13 +6,10 @@ import Canvas from "./Canvas";
 const Caixa = styled.div`
 	height: 100%;
 	width: 100%;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	${filtroRetro()};
-
 	background-color: #1c1c1c;
 `;
 

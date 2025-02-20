@@ -26,13 +26,13 @@ const createWindow = () => {
 
     isDev() ? win.loadURL("http://localhost:5173/") : win.loadFile(path.join(__dirname, "../index.html"));
 
-    // let firstRealod = true;
-    // win.webContents.on('did-finish-load', () => {
-    //     if (firstRealod) {
-    //         win.webContents.reload();
-    //         firstRealod = false;
-    //     }
-    // });
+    let firstRealod = true;
+    win.webContents.on('did-finish-load', () => {
+        if (firstRealod) {
+            win.webContents.reload();
+            firstRealod = false;
+        }
+    });
 
     ipcMain.on("minimizar", () => {
         win.minimize();

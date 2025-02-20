@@ -1,51 +1,46 @@
-import Player from "../classes/Player";
-import Rock from "../classes/Rock";
+import { keys } from "./Inputs";
+import { Player } from "../classes/Player";
+import { Rock } from "../classes/Rock";
 
-type Keys = {
-    left: boolean;
-    right: boolean;
-    up: boolean;
-    down: boolean;
-};
-
-const gameLoop = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, keys: Keys, player: Player, rock: Rock) => {
+export const atualizaJogador = (tela: TamanhoTela, context: CanvasRenderingContext2D, player: Player) => {
     function draw() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
+        context.clearRect(0, 0, tela.largura, tela.altura);
         context.save();
         context.translate(
             player.position.x + player.largura / 2,
             player.position.y + player.altura / 2
         );
-
         if (keys.left && player.position.x >= 0) {
 
             player.moveLeft();
             context.rotate(-0.15);
         }
-        if (keys.right && player.position.x < canvas.width - player.largura) {
+        if (keys.right && player.position.x < tela.largura - player.largura) {
             player.moveRight();
             context.rotate(0.15);
         }
         if (keys.up && player.position.y >= 1) {
             player.moveUp();
         }
-        if (keys.down && player.position.y < canvas.height - player.altura) {
+        if (keys.down && player.position.y < tela.altura - player.altura) {
             player.moveDown();
         }
         context.translate(
             -player.position.x - player.largura / 2,
             -player.position.y - player.altura / 2
         );
-
         player.draw(context);
-
         context.restore();
-
-        rock.draw(context);
-
         requestAnimationFrame(draw);
     }
     requestAnimationFrame(draw);
 };
-export default gameLoop;
+
+export const atualizaInimigos = (tela: TamanhoTela, context: CanvasRenderingContext2D, rock: Rock) => {
+    function draw() {
+        context.clearRect(0, 0, tela.largura, tela.altura);
+        rock.draw(context);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+}

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { keydown, keyup, keys, miraMouse } from "./scripts/Inputs";
-import Player from "./classes/Player";
-import Rock from "./classes/Rock";
-import gameLoop from "./scripts/GameLoop";
+import { keydown, keyup, miraMouse } from "./scripts/Inputs";
+import { atualizaJogador, atualizaInimigos } from "./scripts/GameLoop";
+import { Player } from "./classes/Player";
+import { Rock } from "./classes/Rock";
 import styled from "styled-components";
 
 const Canva = styled.canvas`
@@ -12,9 +12,10 @@ const Canva = styled.canvas`
 `;
 
 const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
+    const [tela] = useState({ largura: $largura, altura: $altura });
     const [player] = useState(new Player($largura, $altura));
     const [playerVelocidade] = useState(player.velocidade);
-    const [rock] = useState(new Rock($largura));
+    const [rock] = useState(new Rock($largura, $altura));
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     addEventListener("keydown", (e) => {
@@ -40,7 +41,8 @@ const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
         if (!context) return;
         context.imageSmoothingEnabled = false;
 
-        gameLoop(canvas, context, keys, player, rock);
+        atualizaInimigos(tela, context, rock);
+        atualizaJogador(tela, context, player);
     }, [player, canvasRef]);
 
     return <Canva ref={canvasRef} width={$largura} height={$altura} />;

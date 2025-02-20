@@ -28,16 +28,16 @@ const Progress = styled.div<{ $progress: number }>`
 `;
 
 export const Loading = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState<number>(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setProgress((time) => {
-                if (time >= 100) {
+                if (time >= 10) {
                     clearInterval(interval);
                     setLoading(false);
-                    return 100;
+                    return 10;
                 }
                 return time + 1;
             });
