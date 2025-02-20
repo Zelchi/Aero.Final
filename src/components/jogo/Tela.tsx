@@ -41,8 +41,8 @@ export const Tela = ({ setIsRun }: isRun) => {
 	return (
 		<Caixa>
 			<Canvas
-				$largura={tamanhoTela.largura - 150}
-				$altura={tamanhoTela.altura - 150}
+				$largura={tamanhoTela.largura}
+				$altura={tamanhoTela.altura}
 				setIsRun={setIsRun}
 			/>
 		</Caixa>
