@@ -52,7 +52,7 @@ export class Jogo {
             this.crosshair.renderizar();
             // Renderiza o player
             this.player.ajustarAngulo({ x: this.crosshair.x, y: this.crosshair.y });
-            this.player.renderizar(this.player, this.context, { largura: this.context.canvas.width, altura: this.context.canvas.height });
+            this.player.renderizar(this.player, this.context);
             this.context.restore(); // Restaurando o estado do contexto
             requestAnimationFrame(draw);
         }

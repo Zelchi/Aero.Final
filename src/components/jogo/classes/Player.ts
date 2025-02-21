@@ -116,7 +116,9 @@ export class Player {
         this.updateSprite();
     }
 
-    renderizar = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela): void => {
+    renderizar = (player: Player, context: CanvasRenderingContext2D): void => {
+        const tela = { largura: context.canvas.width, altura: context.canvas.height };
+
         context.translate(
             player.position.x + player.largura / 2,
             player.position.y + player.altura / 2
