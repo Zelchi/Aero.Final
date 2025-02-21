@@ -3,11 +3,11 @@ import { Rock } from './Rock';
 
 export class Jogo {
     player: Player;
-    rock: Rock;
+    rocks: Rock[];
 
-    constructor(player: Player, rock: Rock) {
+    constructor(player: Player) {
         this.player = player;
-        this.rock = rock;
+        this.rocks = [];
     }
 
     renderizarJogo = (context: CanvasRenderingContext2D) => {
@@ -15,12 +15,27 @@ export class Jogo {
             context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Limpa para o novo frame
             context.save(); // Salvando o estado do contexto
 
-            this.rock.renderizar(this.rock, context);
+            this.rocks.forEach((rock, index) => {
+                rock.renderizar(rock, context);
+                if (rock.position.y > context.canvas.height) {
+                    this.rocks.splice(index, 1); // Remove a pedra que saiu da tela
+                }
+            });
+
             this.player.renderizar(this.player, context, { largura: context.canvas.width, altura: context.canvas.height });
 
             context.restore(); // Restaurando o estado do contexto
             requestAnimationFrame(draw);
         }
         requestAnimationFrame(draw);
+
+        this.gerarPedrasPeriodicamente(context, 2000);
+    }
+
+    gerarPedrasPeriodicamente = (context: CanvasRenderingContext2D, intervalo: number) => {
+        setInterval(() => {
+            const novaPedra = new Rock(context.canvas.width, context.canvas.height);
+            this.rocks.push(novaPedra);
+        }, intervalo);
     }
 }
