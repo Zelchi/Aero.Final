@@ -64,7 +64,6 @@ export class Jogo {
         // Evento de mover o mouse
         document.addEventListener('mousemove', (e) => {
             this.crosshair.update({ x: e.clientX, y: e.clientY });
-            this.player.ajustarAngulo({ x: e.clientX, y: e.clientY });
         });
 
         // Evento de pressionar clique do mouse
