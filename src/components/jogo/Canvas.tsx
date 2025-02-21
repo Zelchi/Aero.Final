@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { keydown, keyup, miraMouse } from "./scripts/Inputs";
 import { Player } from "./classes/Player";
 import { Rock } from "./classes/Rock";
 import { Jogo } from "./classes/Jogo";
@@ -20,18 +19,19 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
 
     addEventListener("keydown", (e) => {
         const key = e.key.toLowerCase();
-        keydown(key, player);
+        player.keydown(key);
         if (key === "escape") setIsRun(false);
     });
 
     addEventListener("keyup", (e) => {
         const key = e.key.toLowerCase();
-        keyup(key);
+        player.keyup(key);
+        if (key === "escape") setIsRun(false);
     });
 
     addEventListener("mousemove", (e) => {
         const aim = e;
-        miraMouse(aim, player);
+        player.mira(aim);
     });
 
     useEffect(() => {

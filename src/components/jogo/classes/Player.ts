@@ -1,4 +1,3 @@
-import { keys } from "../scripts/Inputs";
 import {
     CAMINHO_NAVE_IMAGE,
     CAMINHO_MOTOR_IMAGE,
@@ -6,11 +5,20 @@ import {
     FRAME_INICIAL,
 } from "../../../utils/Constantes";
 
+const keys = {
+    left: false,
+    right: false,
+    up: false,
+    down: false,
+};
+
 export class Player {
     largura: number;
     altura: number;
     position: { x: number; y: number };
     velocidade: number;
+    vel_linear: number;
+    vel_angular: number;
     angulo: number;
     engineImage: HTMLImageElement;
     engineSprites: HTMLImageElement;
@@ -22,7 +30,9 @@ export class Player {
     constructor(larguraTela: number, alturaTela: number) {
         this.largura = Math.min(larguraTela, alturaTela) * 0.1;
         this.altura = Math.min(larguraTela, alturaTela) * 0.1;
-        this.velocidade = alturaTela * 0.007;
+        this.velocidade = Math.min(larguraTela, alturaTela) * 0.007;
+        this.vel_linear = this.velocidade;
+        this.vel_angular = this.velocidade * 0.7071;
         this.angulo = 0;
         this.sx = 0;
         this.frameConter = FRAME_INICIAL;
@@ -40,39 +50,42 @@ export class Player {
         };
     }
 
-    getImg(path: string) {
+    getImg(path: string): HTMLImageElement {
         const image = new Image();
         image.src = path;
         return image;
     }
 
-    rotate(angle: number) {
+    rotate(angle: number): void {
         this.angulo = angle;
     }
 
-    moveLeft() {
+    moveLeft(): void {
         this.position.x -= this.velocidade;
         this.updateHitbox();
     }
-    moveRight() {
+
+    moveRight(): void {
         this.position.x += this.velocidade;
         this.updateHitbox();
     }
-    moveUp() {
+
+    moveUp(): void {
         this.position.y -= this.velocidade;
         this.updateHitbox();
     }
-    moveDown() {
+
+    moveDown(): void {
         this.position.y += this.velocidade;
         this.updateHitbox();
     }
 
-    updateHitbox() {
+    updateHitbox(): void {
         this.hitbox.x = this.position.x + this.largura / 2;
         this.hitbox.y = this.position.y + this.altura / 2;
     }
 
-    draw(context: CanvasRenderingContext2D) {
+    draw(context: CanvasRenderingContext2D): void {
         context.save();
         context.translate(this.hitbox.x, this.hitbox.y);
         context.rotate(this.angulo);
@@ -93,19 +106,15 @@ export class Player {
         this.updateSprite();
     }
 
-    updateSprite() {
-        if (this.frameConter == 0) {
-            if (this.sx == 96) {
-                this.sx = 0;
-            } else {
-                this.sx += 48;
-            }
+    updateSprite(): void {
+        if (this.frameConter === 0) {
+            this.sx = this.sx === 96 ? 0 : this.sx + 48;
             this.frameConter = FRAME_INICIAL;
         }
         this.frameConter--;
     }
 
-    renderizar = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela) => {
+    renderizar = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela): void => {
         context.translate(
             player.position.x + player.largura / 2,
             player.position.y + player.altura / 2
@@ -128,4 +137,36 @@ export class Player {
         );
         player.draw(context);
     };
+
+    keydown = (key: string): void => {
+        if (key === "a") keys.left = true;
+        if (key === "d") keys.right = true;
+        if (key === "w") keys.up = true;
+        if (key === "s") keys.down = true;
+        this.ajustaVelocidade();
+    };
+
+    keyup = (key: string): void => {
+        if (key === "a") keys.left = false;
+        if (key === "d") keys.right = false;
+        if (key === "w") keys.up = false;
+        if (key === "s") keys.down = false;
+        this.ajustaVelocidade();
+    };
+
+    ajustaVelocidade(): void {
+        if ((keys.up && keys.left) || (keys.up && keys.right) || (keys.down && keys.left) || (keys.down && keys.right)) {
+            this.velocidade = this.vel_linear * 0.7071;
+        } else {
+            this.velocidade = this.vel_linear;
+        }
+    }
+
+    mira = (aim: Aim): void => {
+        const angle = Math.atan2(
+            aim.pageX - (this.position.x + this.altura * 0.5),
+            -(aim.pageY - (this.position.y + this.largura * 0.5))
+        );
+        this.rotate(angle);
+    }
 }
