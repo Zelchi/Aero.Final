@@ -37,7 +37,7 @@ export class Jogo {
 
         // Evento de mover o mouse
         context.canvas.addEventListener('mousemove', (e) => {
-            this.player.mira(e, context.canvas);
+            this.player.mira(e);
         });
 
         // Evento de pressionar a tecla

@@ -171,10 +171,9 @@ export class Player {
         }
     }
 
-    mira = (aim: MouseEvent, canvas: HTMLCanvasElement): void => {
-        const rect = canvas.getBoundingClientRect();
-        this.miraPosition.x = aim.clientX - rect.left;
-        this.miraPosition.y = aim.clientY - rect.top;
+    mira = (aim: MouseEvent): void => {
+        this.miraPosition.x = aim.clientX;
+        this.miraPosition.y = aim.clientY;
         const angle = Math.atan2(
             this.miraPosition.x - (this.position.x + this.largura / 2),
             -(this.miraPosition.y - (this.position.y + this.altura / 2))
