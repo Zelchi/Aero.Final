@@ -121,6 +121,7 @@ export class Player {
             player.position.x + player.largura / 2,
             player.position.y + player.altura / 2
         );
+
         if (keys.left && player.position.x >= 0) {
             player.moveLeft();
         }
@@ -133,11 +134,11 @@ export class Player {
         if (keys.down && player.position.y < tela.altura - player.altura) {
             player.moveDown();
         }
+
         context.translate(
             -player.position.x - player.largura / 2,
             -player.position.y - player.altura / 2
         );
-        player.draw(context);
 
         // Desenhar a bolinha do cursor
         context.beginPath();
@@ -145,6 +146,9 @@ export class Player {
         context.fillStyle = 'red';
         context.fill();
         context.closePath();
+
+        // Desenha o Player
+        player.draw(context);
     };
 
     keydown = (key: string): void => {
