@@ -34,6 +34,23 @@ export class Jogo {
         requestAnimationFrame(draw);
 
         this.gerarPedras(context, 2000);
+
+        // Evento de mover o mouse
+        context.canvas.addEventListener('mousemove', (e) => {
+            this.player.mira(e, context.canvas);
+        });
+
+        // Evento de pressionar a tecla
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            this.player.keydown(key);
+        });
+
+        // Evento de soltar a tecla
+        document.addEventListener('keyup', (e) => {
+            const key = e.key.toLowerCase();
+            this.player.keyup(key);
+        });
     }
 
     // Gera as pedras a cada (2000) = 2 segundos.

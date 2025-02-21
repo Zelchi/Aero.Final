@@ -26,6 +26,7 @@ export class Player {
     image: HTMLImageElement;
     sx: number;
     hitbox: { x: number; y: number; radius: number };
+    miraPosition: { x: number; y: number };
 
     constructor(larguraTela: number, alturaTela: number) {
         this.largura = Math.min(larguraTela, alturaTela) * 0.1;
@@ -48,6 +49,7 @@ export class Player {
             y: this.position.y + this.altura / 2,
             radius: Math.min(this.largura, this.altura) / 4,
         };
+        this.miraPosition = { x: 0, y: 0 };
     }
 
     getImg(path: string): HTMLImageElement {
@@ -136,6 +138,13 @@ export class Player {
             -player.position.y - player.altura / 2
         );
         player.draw(context);
+
+        // Desenhar a bolinha do cursor
+        context.beginPath();
+        context.arc(this.miraPosition.x, this.miraPosition.y, 5, 0, Math.PI * 2);
+        context.fillStyle = 'red';
+        context.fill();
+        context.closePath();
     };
 
     keydown = (key: string): void => {
@@ -162,10 +171,13 @@ export class Player {
         }
     }
 
-    mira = (aim: MouseEvent): void => {
+    mira = (aim: MouseEvent, canvas: HTMLCanvasElement): void => {
+        const rect = canvas.getBoundingClientRect();
+        this.miraPosition.x = aim.clientX - rect.left;
+        this.miraPosition.y = aim.clientY - rect.top;
         const angle = Math.atan2(
-            aim.pageX - (this.position.x + this.altura * 0.5),
-            -(aim.pageY - (this.position.y + this.largura * 0.5))
+            this.miraPosition.x - (this.position.x + this.largura / 2),
+            -(this.miraPosition.y - (this.position.y + this.altura / 2))
         );
         this.rotate(angle);
     }

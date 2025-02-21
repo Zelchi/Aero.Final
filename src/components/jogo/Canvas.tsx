@@ -4,7 +4,7 @@ import { Jogo } from "./classes/Jogo";
 import styled from "styled-components";
 
 const Canva = styled.canvas`
-    cursor: crosshair;
+    cursor: none;
     border: solid 3px white;
     background-color: #2c2c2c;
     z-index: 5;
@@ -17,19 +17,7 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
 
     addEventListener("keydown", (e) => {
         const key = e.key.toLowerCase();
-        player.keydown(key);
         if (key === "escape") setIsRun(false);
-    });
-
-    addEventListener("keyup", (e) => {
-        const key = e.key.toLowerCase();
-        player.keyup(key);
-        if (key === "escape") setIsRun(false);
-    });
-
-    addEventListener("mousemove", (e) => {
-        const aim = e;
-        player.mira(aim);
     });
 
     useEffect(() => {
@@ -38,7 +26,7 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
         const context = canvas.getContext("2d");
         if (!context) return;
         context.imageSmoothingEnabled = false;
-        const jogo = new Jogo(player,);
+        const jogo = new Jogo(player);
         jogo.renderizarJogo(context);
     }, []);
 
