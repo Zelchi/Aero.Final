@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { Player } from "./classes/Player";
+import { useEffect, useRef } from "react";
 import { Jogo } from "./classes/Jogo";
 import styled from "styled-components";
 
@@ -11,8 +10,6 @@ const Canva = styled.canvas`
 `;
 
 export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
-    const [tela] = useState({ largura: $largura, altura: $altura });
-    const [player] = useState(new Player(tela.largura, tela.altura));
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     addEventListener("keydown", (e) => {
@@ -23,8 +20,7 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas?.getContext("2d");
-        const jogo = new Jogo(player);
-        jogo.renderizarJogo(context!);
+        new Jogo(context!).renderizarJogo()
     }, []);
 
     return <Canva ref={canvasRef} width={$largura} height={$altura} />;

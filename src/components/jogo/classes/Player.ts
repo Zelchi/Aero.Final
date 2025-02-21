@@ -175,9 +175,9 @@ export class Player {
         }
     }
 
-    mira = (aim: MouseEvent): void => {
-        this.miraPosition.x = aim.clientX;
-        this.miraPosition.y = aim.clientY;
+    mira = (aim: Position): void => {
+        this.miraPosition.x = aim.x;
+        this.miraPosition.y = aim.y;
         const angle = Math.atan2(
             this.miraPosition.x - (this.position.x + this.largura / 2),
             -(this.miraPosition.y - (this.position.y + this.altura / 2))

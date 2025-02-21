@@ -13,6 +13,11 @@ type TamanhoTela = {
     altura: number,
 }
 
+type Position = {
+    x: number,
+    y: number,
+}
+
 type isRun = {
     isRun: boolean,
     setIsRun: (bool: boolean) => void,
