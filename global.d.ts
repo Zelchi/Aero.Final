@@ -8,11 +8,6 @@ type Canvas = {
     setIsRun: (bool: boolean) => void,
 }
 
-type Aim = {
-    pageX: number,
-    pageY: number,
-}
-
 type TamanhoTela = {
     largura: number,
     altura: number,
