@@ -92,7 +92,6 @@ export class Jogo {
                 x: this.player.position.x + this.player.largura / 2,
                 y: this.player.position.y + this.player.altura / 2,
             },
-            10,
             this.player.angulo - Math.PI / 2
         );
         this.disparos.push(novoDisparo);

@@ -6,21 +6,19 @@ export class Disparo {
     angulo: number;
     constructor(
         position: { x: number; y: number },
-        velocity: number,
         angulo: number
     ) {
         this.position = position;
-        this.largura = 20;
-        this.altura = 2;
-        this.velocity = velocity;
+        this.largura = 10;
+        this.altura = 10;
+        this.velocity = 10;
         this.angulo = angulo;
     }
     draw(context: CanvasRenderingContext2D) {
         context.save();
-        context.translate(this.position.x, this.position.y);
-        context.rotate(this.angulo);
+        context.translate(this.position.x - this.largura, this.position.y - this.altura);
         context.fillStyle = "white";
-        context.fillRect(0, 0, this.largura, this.altura);
+        context.fillRect((this.largura / 2), (this.altura / 2), this.largura, this.altura);
         context.restore();
     }
     renderizar(context: CanvasRenderingContext2D) {

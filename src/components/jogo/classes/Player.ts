@@ -137,6 +137,15 @@ export class Player {
             player.moveDown();
         }
 
+        context.beginPath();
+        context.moveTo(0, 400);
+        context.lineTo(0, -400);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(-400, 0);
+        context.lineTo(400, 0);
+        context.stroke();
+
         context.translate(
             -player.position.x - player.largura / 2,
             -player.position.y - player.altura / 2
