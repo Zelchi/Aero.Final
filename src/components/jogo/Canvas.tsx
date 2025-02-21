@@ -8,23 +8,17 @@ import styled from "styled-components";
 const Canva = styled.canvas`
     cursor: crosshair;
     border: solid 3px white;
-    /* background-color: #2c2c2c; */
-    /* z-index: 5; */
+    background-color: #2c2c2c;
+    z-index: 5;
 `;
 
 export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
     const [tela] = useState({ largura: $largura, altura: $altura });
     const [player] = useState(new Player(tela.largura, tela.altura));
-    const [rocks, setRocks] = useState<Rock[]>([]);
+    const [rock] = useState(new Rock(tela.largura, tela.altura));
+    const [rocks] = useState([rock]);
     const [playerVelocidade] = useState(player.velocidade);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-
-    useEffect(() => {
-        const intervalo = setTimeout(() => {
-            setRocks((prevRocks) => [...prevRocks, new Rock(tela.largura, tela.altura)]);
-        }, 3000)
-        return () => clearTimeout(intervalo);
-    }, [rocks]);
 
     addEventListener("keydown", (e) => {
         const key = e.key.toLowerCase();

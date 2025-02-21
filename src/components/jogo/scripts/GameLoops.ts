@@ -1,11 +1,8 @@
 import { keys } from "./Inputs";
 import { Player } from "../classes/Player";
 import { Rock } from "../classes/Rock";
-import { pegaTamanhoTela } from "./PegaTamanhoTela";
 
-export const renderizarPlayer = (player: Player, context: CanvasRenderingContext2D) => {
-
-    const tela = pegaTamanhoTela();
+export const renderizarPlayer = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela) => {
     context.translate(
         player.position.x + player.largura / 2,
         player.position.y + player.altura / 2
@@ -30,9 +27,12 @@ export const renderizarPlayer = (player: Player, context: CanvasRenderingContext
 };
 
 export const renderizarPedras = (rocks: Rock[], context: CanvasRenderingContext2D) => {
+    console.log(rocks)
     rocks.forEach((rock) => {
+        console.log("batata")
         context.translate(rock.position.x, rock.position.y);
-        rock.atualizarInimigo();
+        rock.mover();
+        context.translate(-rock.position.x, -rock.position.y);
         rock.draw(context);
     });
 }
