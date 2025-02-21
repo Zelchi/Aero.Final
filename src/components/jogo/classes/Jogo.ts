@@ -71,8 +71,12 @@ export class Jogo {
   disparar = () => {
     addEventListener("click", () => {
       const novoDisparo = new Disparo(
-        { x: this.player.position.x, y: this.player.position.y },
-        10
+        {
+          x: this.player.position.x + this.player.largura / 2,
+          y: this.player.position.y + this.player.altura / 2,
+        },
+        10,
+        this.player.angulo - Math.PI / 2
       );
       this.disparos.push(novoDisparo);
     });
