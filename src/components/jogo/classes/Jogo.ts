@@ -1,6 +1,9 @@
 import { Player } from './Player';
 import { Rock } from './Rock';
 
+// Classe jogo é responsável por renderizar o jogo.
+// Todas as entidades do jogo são renderizadas aqui.
+// Estão encapsuladas no objeto jogo.
 export class Jogo {
     player: Player;
     rocks: Rock[];
@@ -15,10 +18,11 @@ export class Jogo {
             context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Limpa para o novo frame
             context.save(); // Salvando o estado do contexto
 
+            // Renderiza o array de pedras
             this.rocks.forEach((rock, index) => {
                 rock.renderizar(rock, context);
                 if (rock.position.y > context.canvas.height) {
-                    this.rocks.splice(index, 1); // Remove a pedra que saiu da tela
+                    this.rocks.splice(index, 1);
                 }
             });
 
@@ -29,10 +33,11 @@ export class Jogo {
         }
         requestAnimationFrame(draw);
 
-        this.gerarPedrasPeriodicamente(context, 2000);
+        this.gerarPedras(context, 2000);
     }
 
-    gerarPedrasPeriodicamente = (context: CanvasRenderingContext2D, intervalo: number) => {
+    // Gera as pedras a cada (2000) = 2 segundos.
+    gerarPedras = (context: CanvasRenderingContext2D, intervalo: number) => {
         setInterval(() => {
             const novaPedra = new Rock(context.canvas.width, context.canvas.height);
             this.rocks.push(novaPedra);
