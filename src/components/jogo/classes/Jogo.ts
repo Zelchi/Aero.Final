@@ -1,14 +1,13 @@
 import { Player } from './Player';
 import { Rock } from './Rock';
-import { renderizarPlayer, renderizarPedras } from '../scripts/GameLoops';
 
 export class Jogo {
     player: Player;
-    rocks: Rock[];
+    rock: Rock;
 
-    constructor(player: Player, rocks: Rock[]) {
+    constructor(player: Player, rock: Rock) {
         this.player = player;
-        this.rocks = rocks;
+        this.rock = rock;
     }
 
     renderizarJogo = (context: CanvasRenderingContext2D) => {
@@ -16,8 +15,8 @@ export class Jogo {
             context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Limpa para o novo frame
             context.save(); // Salvando o estado do contexto
 
-            renderizarPedras(this.rocks, context);
-            renderizarPlayer(this.player, context, { largura: context.canvas.width, altura: context.canvas.height });
+            this.rock.renderizar(this.rock, context);
+            this.player.renderizar(this.player, context, { largura: context.canvas.width, altura: context.canvas.height });
 
             context.restore(); // Restaurando o estado do contexto
             requestAnimationFrame(draw);

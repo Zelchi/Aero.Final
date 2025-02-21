@@ -29,7 +29,6 @@ export const Tela = ({ setIsRun }: isRun) => {
 
 	useEffect(() => {
 		window.addEventListener("resize", handleResize);
-		console.log(tamanhoTela);
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};

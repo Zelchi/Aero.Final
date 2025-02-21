@@ -46,4 +46,9 @@ export class Rock {
     mover = () => {
         this.position.y += this.velocidade;
     }
+
+    renderizar = (rocks: Rock, context: CanvasRenderingContext2D) => {
+        rocks.mover();
+        rocks.draw(context);
+    }
 }

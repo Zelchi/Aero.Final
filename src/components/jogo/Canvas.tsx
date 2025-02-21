@@ -16,19 +16,17 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
     const [tela] = useState({ largura: $largura, altura: $altura });
     const [player] = useState(new Player(tela.largura, tela.altura));
     const [rock] = useState(new Rock(tela.largura, tela.altura));
-    const [rocks] = useState([rock]);
-    const [playerVelocidade] = useState(player.velocidade);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     addEventListener("keydown", (e) => {
         const key = e.key.toLowerCase();
-        keydown(key, player, playerVelocidade);
+        keydown(key, player);
         if (key === "escape") setIsRun(false);
     });
 
     addEventListener("keyup", (e) => {
         const key = e.key.toLowerCase();
-        keyup(key, player, playerVelocidade);
+        keyup(key);
     });
 
     addEventListener("mousemove", (e) => {
@@ -42,7 +40,7 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
         const context = canvas.getContext("2d");
         if (!context) return;
         context.imageSmoothingEnabled = false;
-        new Jogo(player, rocks).renderizarJogo(context);
+        new Jogo(player, rock).renderizarJogo(context);
     }, []);
 
     return <Canva ref={canvasRef} width={$largura} height={$altura} />;

@@ -1,3 +1,4 @@
+import { keys } from "../scripts/Inputs";
 import {
     CAMINHO_NAVE_IMAGE,
     CAMINHO_MOTOR_IMAGE,
@@ -103,4 +104,28 @@ export class Player {
         }
         this.frameConter--;
     }
+
+    renderizar = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela) => {
+        context.translate(
+            player.position.x + player.largura / 2,
+            player.position.y + player.altura / 2
+        );
+        if (keys.left && player.position.x >= 0) {
+            player.moveLeft();
+        }
+        if (keys.right && player.position.x < tela.largura - player.largura) {
+            player.moveRight();
+        }
+        if (keys.up && player.position.y >= 1) {
+            player.moveUp();
+        }
+        if (keys.down && player.position.y < tela.altura - player.altura) {
+            player.moveDown();
+        }
+        context.translate(
+            -player.position.x - player.largura / 2,
+            -player.position.y - player.altura / 2
+        );
+        player.draw(context);
+    };
 }

@@ -7,27 +7,25 @@ export const keys = {
 	down: false,
 };
 
-export const keydown = (key: string, player: Player, playerVelocidade: number) => {
+export const keydown = (key: string, player: Player) => {
 	if (key === "a") keys.left = true;
 	if (key === "d") keys.right = true;
 	if (key === "w") keys.up = true;
 	if (key === "s") keys.down = true;
 
+	const playerVelocidade = player.velocidade;
 	if (
 		(keys.up && keys.left) ||
 		(keys.up && keys.right) ||
 		(keys.down && keys.left) ||
 		(keys.down && keys.right)
 	) {
-		player.velocidade = playerVelocidade * 0.7071;
-	} else {
-		player.velocidade = playerVelocidade;
-	}
+		player.velocidade * 0.7071;
+	};
+	player.velocidade = playerVelocidade;
 };
 
-export const keyup = (key: string, player: Player, playerVelocidade: any) => {
-	player.velocidade = playerVelocidade;
-
+export const keyup = (key: string) => {
 	if (key === "a") keys.left = false;
 	if (key === "d") keys.right = false;
 	if (key === "w") keys.up = false;
