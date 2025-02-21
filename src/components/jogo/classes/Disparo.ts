@@ -16,10 +16,11 @@ export class Disparo {
     this.angulo = angulo;
   }
   draw(context: CanvasRenderingContext2D) {
-    context.save();
-    context.rotate(this.angulo);
+    context.save()
     context.fillStyle = "white";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    console.log(this.angulo);
+    context.rotate(this.angulo);
     context.restore();
   }
   renderizar(context: CanvasRenderingContext2D) {
