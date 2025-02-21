@@ -87,6 +87,14 @@ export class Player {
         this.hitbox.y = this.position.y + this.altura / 2;
     }
 
+    updateSprite(): void {
+        if (this.frameConter === 0) {
+            this.sx = this.sx === 96 ? 0 : this.sx + 48;
+            this.frameConter = FRAME_INICIAL;
+        }
+        this.frameConter--;
+    }
+
     draw(context: CanvasRenderingContext2D): void {
         context.save();
         context.translate(this.hitbox.x, this.hitbox.y);
@@ -106,14 +114,6 @@ export class Player {
 
         context.restore();
         this.updateSprite();
-    }
-
-    updateSprite(): void {
-        if (this.frameConter === 0) {
-            this.sx = this.sx === 96 ? 0 : this.sx + 48;
-            this.frameConter = FRAME_INICIAL;
-        }
-        this.frameConter--;
     }
 
     renderizar = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela): void => {
@@ -139,13 +139,6 @@ export class Player {
             -player.position.x - player.largura / 2,
             -player.position.y - player.altura / 2
         );
-
-        // Desenhar a bolinha do cursor
-        context.beginPath();
-        context.arc(this.miraPosition.x, this.miraPosition.y, 5, 0, Math.PI * 2);
-        context.fillStyle = 'red';
-        context.fill();
-        context.closePath();
 
         // Desenha o Player
         player.draw(context);
@@ -175,7 +168,7 @@ export class Player {
         }
     }
 
-    mira = (aim: Position): void => {
+    ajustarAngulo = (aim: Position): void => {
         this.miraPosition.x = aim.x;
         this.miraPosition.y = aim.y;
         const angle = Math.atan2(
