@@ -12,6 +12,7 @@ export class Jogo {
     disparos: Disparo[];
 
     constructor(context: CanvasRenderingContext2D) {
+        this.context = context;
         this.player = new Player(context.canvas.width, context.canvas.height);
         this.rocks = [];
         this.disparos = [];
@@ -33,11 +34,11 @@ export class Jogo {
 
             this.player.renderizar(this.player, this.context, { largura: this.context.canvas.width, altura: this.context.canvas.height });
             this.disparos.forEach((disparo, index) => {
-                disparo.renderizar(context);
-                if (disparo.position.y > context.canvas.height) {
-                  this.disparos.splice(index, 1);
+                disparo.renderizar(this.context);
+                if (disparo.position.y > this.context.canvas.height) {
+                    this.disparos.splice(index, 1);
                 }
-              });
+            });
             this.context.restore(); // Restaurando o estado do contexto
             requestAnimationFrame(draw);
         }
@@ -49,6 +50,11 @@ export class Jogo {
         document.addEventListener('mousemove', (e) => {
             this.player.mira({ x: e.clientX, y: e.clientY });
         });
+
+        // Evento de pressionar clique do mouse
+        document.addEventListener('click', () => {
+            this.disparar();
+        })
 
         // Evento de pressionar a tecla
         document.addEventListener('keydown', (e) => {
@@ -66,19 +72,17 @@ export class Jogo {
     }
 
     /// Disparo On Click
-  disparar = () => {
-    addEventListener("click", () => {
-      const novoDisparo = new Disparo(
-        {
-          x: this.player.position.x + this.player.largura / 2,
-          y: this.player.position.y + this.player.altura / 2,
-        },
-        10,
-        this.player.angulo - Math.PI / 2
-      );
-      this.disparos.push(novoDisparo);
-    });
-  };
+    disparar = () => {
+        const novoDisparo = new Disparo(
+            {
+                x: this.player.position.x + this.player.largura / 2,
+                y: this.player.position.y + this.player.altura / 2,
+            },
+            10,
+            this.player.angulo - Math.PI / 2
+        );
+        this.disparos.push(novoDisparo);
+    };
 
     // Gera as pedras a cada (2000) = 2 segundos.
     gerarPedras = (context: CanvasRenderingContext2D, intervalo: number) => {
