@@ -1,7 +1,21 @@
 import { keys } from "./Inputs";
 import { Player } from "../classes/Player";
 import { Rock } from "../classes/Rock";
+import { Disparo } from "../classes/Disparo";
 
+export const atualizarDisparo = (
+  context: CanvasRenderingContext2D,
+  disparo: Disparo
+) => {
+  function draw() {
+    context.save();
+    disparo.atualizarDisparo(disparo.velocity);
+    disparo.draw(context);
+    context.restore();
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+};
 export const atualizaJogador = (
   tela: TamanhoTela,
   context: CanvasRenderingContext2D,
