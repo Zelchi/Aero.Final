@@ -3,43 +3,61 @@ import { CAMINHO_PEDRA_IMAGE } from "../../../utils/Constantes";
 export class Rock {
   largura: number;
   altura: number;
-  position: { x: number; y: number };
   velocidade: number;
+  rotationSpeed: number;
+  position: { x: number; y: number };
   image: HTMLImageElement;
+  angle: number;
+
   constructor(larguraTela: number, alturaTela: number) {
-    this.largura = Math.min(larguraTela, alturaTela) * 0.1;
-    this.altura = Math.min(larguraTela, alturaTela) * 0.1;
-    this.velocidade = alturaTela * 0.007;
+    this.largura = Math.min(larguraTela, alturaTela) * 0.05;
+    this.altura = Math.min(larguraTela, alturaTela) * 0.05;
+    this.velocidade = alturaTela * 0.002;
+    this.rotationSpeed = 0.5;
     this.position = {
-      x: this.spawn(0, 700),
-      y: 500,
+      x: this.spawn(0, larguraTela - this.largura),
+      y: -100,
     };
     this.image = this.getImg(CAMINHO_PEDRA_IMAGE);
+    this.angle = 0;
   }
-  getImg(path: string) {
+
+  getImg = (path: string) => {
     const image = new Image();
     image.src = path;
     return image;
-  }
-  spawn(min: number, max: number) {
+  };
+
+  spawn = (min: number, max: number) => {
     return Math.random() * (max - min) + min;
-  }
-  draw(context: CanvasRenderingContext2D) {
-    context.fillRect(
-      this.position.x,
-      this.position.y,
-      this.largura,
-      this.altura
+  };
+
+  draw = (context: CanvasRenderingContext2D) => {
+    context.save();
+
+    context.translate(
+      this.position.x + this.largura / 2,
+      this.position.y + this.altura / 2
     );
+    this.angle += this.rotationSpeed;
+    context.rotate((this.angle * Math.PI) / 180);
     context.drawImage(
       this.image,
-      this.position.x,
-      this.position.y,
+      -this.largura / 2,
+      -this.altura / 2,
       this.largura,
       this.altura
     );
-  }
-  atualizarInimigo() {
+
+    context.restore();
+  };
+
+  mover = () => {
     this.position.y += this.velocidade;
-  }
+  };
+
+  renderizar = (rocks: Rock, context: CanvasRenderingContext2D) => {
+    rocks.mover();
+    rocks.draw(context);
+  };
 }

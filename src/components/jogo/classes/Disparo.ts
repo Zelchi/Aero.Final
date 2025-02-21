@@ -13,7 +13,8 @@ export class Disparo {
     context.fillStyle = "white";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
-  atualizarDisparo(velocity: number) {
-    this.position.y -= velocity;
+  renderizar(context: CanvasRenderingContext2D) {
+    this.draw(context);
+    this.position.y -= 10;
   }
 }

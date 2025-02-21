@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { filtroRetro } from "../../utils/FiltroRetro";
+import { Canvas } from "./Canvas";
 import styled from "styled-components";
-import Canvas from "./Canvas";
 
 const Caixa = styled.div`
 	height: 100%;
@@ -29,7 +29,6 @@ export const Tela = ({ setIsRun }: isRun) => {
 
 	useEffect(() => {
 		window.addEventListener("resize", handleResize);
-		console.log(tamanhoTela);
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
