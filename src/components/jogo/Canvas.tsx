@@ -22,12 +22,9 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
-        const context = canvas.getContext("2d");
-        if (!context) return;
-        context.imageSmoothingEnabled = false;
+        const context = canvas?.getContext("2d");
         const jogo = new Jogo(player);
-        jogo.renderizarJogo(context);
+        jogo.renderizarJogo(context!);
     }, []);
 
     return <Canva ref={canvasRef} width={$largura} height={$altura} />;

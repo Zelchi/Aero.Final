@@ -15,6 +15,7 @@ export class Jogo {
 
     renderizarJogo = (context: CanvasRenderingContext2D) => {
         const draw = () => { //Pegar o o tempo e colocar como o modificador de velocidade
+            context.imageSmoothingEnabled = false;
             context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Limpa para o novo frame
             context.save(); // Salvando o estado do contexto
 
