@@ -87,6 +87,14 @@ export class Player {
         this.hitbox.y = this.position.y + this.altura / 2;
     }
 
+    updateSprite(): void {
+        if (this.frameConter === 0) {
+            this.sx = this.sx === 96 ? 0 : this.sx + 48;
+            this.frameConter = FRAME_INICIAL;
+        }
+        this.frameConter--;
+    }
+
     draw(context: CanvasRenderingContext2D): void {
         context.save();
         context.translate(this.hitbox.x, this.hitbox.y);
@@ -108,15 +116,9 @@ export class Player {
         this.updateSprite();
     }
 
-    updateSprite(): void {
-        if (this.frameConter === 0) {
-            this.sx = this.sx === 96 ? 0 : this.sx + 48;
-            this.frameConter = FRAME_INICIAL;
-        }
-        this.frameConter--;
-    }
+    renderizar = (player: Player, context: CanvasRenderingContext2D): void => {
+        const tela = { largura: context.canvas.width, altura: context.canvas.height };
 
-    renderizar = (player: Player, context: CanvasRenderingContext2D, tela: TamanhoTela): void => {
         context.translate(
             player.position.x + player.largura / 2,
             player.position.y + player.altura / 2
@@ -135,17 +137,19 @@ export class Player {
             player.moveDown();
         }
 
+        context.beginPath();
+        context.moveTo(0, 400);
+        context.lineTo(0, -400);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(-400, 0);
+        context.lineTo(400, 0);
+        context.stroke();
+
         context.translate(
             -player.position.x - player.largura / 2,
             -player.position.y - player.altura / 2
         );
-
-        // Desenhar a bolinha do cursor
-        context.beginPath();
-        context.arc(this.miraPosition.x, this.miraPosition.y, 5, 0, Math.PI * 2);
-        context.fillStyle = 'red';
-        context.fill();
-        context.closePath();
 
         // Desenha o Player
         player.draw(context);
@@ -175,9 +179,9 @@ export class Player {
         }
     }
 
-    mira = (aim: MouseEvent): void => {
-        this.miraPosition.x = aim.clientX;
-        this.miraPosition.y = aim.clientY;
+    ajustarAngulo = (aim: Position): void => {
+        this.miraPosition.x = aim.x;
+        this.miraPosition.y = aim.y;
         const angle = Math.atan2(
             this.miraPosition.x - (this.position.x + this.largura / 2),
             -(this.miraPosition.y - (this.position.y + this.altura / 2))

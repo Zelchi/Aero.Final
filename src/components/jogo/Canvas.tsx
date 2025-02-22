@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { Player } from "./classes/Player";
+import { useEffect, useRef } from "react";
 import { Jogo } from "./classes/Jogo";
 import styled from "styled-components";
 
@@ -8,13 +7,19 @@ const Canva = styled.canvas`
   border: solid 3px white;
   background-color: #2c2c2c;
   z-index: 5;
+  cursor: none;
+  border: solid 3px white;
+  background-color: #2c2c2c;
+  z-index: 5;
 `;
 
 export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
-  const [tela] = useState({ largura: $largura, altura: $altura });
-  const [player] = useState(new Player(tela.largura, tela.altura));
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  addEventListener("keydown", (e) => {
+    const key = e.key.toLowerCase();
+    if (key === "escape") setIsRun(false);
+  });
   addEventListener("keydown", (e) => {
     const key = e.key.toLowerCase();
     if (key === "escape") setIsRun(false);
@@ -23,9 +28,10 @@ export const Canvas = ({ $largura, $altura, setIsRun }: Canvas) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
-    const jogo = new Jogo(player);
-    jogo.renderizarJogo(context!);
+    new Jogo(context!).renderizarJogo();
   }, []);
 
   return <Canva ref={canvasRef} width={$largura} height={$altura} />;
+  return <Canva ref={canvasRef} width={$largura} height={$altura} />;
 };
+
