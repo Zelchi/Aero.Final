@@ -17,9 +17,10 @@ export class Disparo {
   }
   draw(context: CanvasRenderingContext2D) {
     context.save();
+    context.translate(this.position.x, this.position.y);
     context.rotate(this.angulo);
     context.fillStyle = "white";
-    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    context.fillRect(0, 0, this.height, this.width);
     context.restore();
   }
   renderizar(context: CanvasRenderingContext2D) {
