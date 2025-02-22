@@ -42,17 +42,7 @@ export class Jogo {
       this.context.save(); // Salvando o estado do contexto
 
       //verifica colisão
-      this.rocks.forEach((rock) => {
-        this.disparos.forEach((disparo) => {
-          rock.colisao(disparo);
-          disparo.colisao(rock);
-        });
-      });
-
-      this.rocks = this.rocks.filter((rock) => !rock.verificarColisao);
-      this.disparos = this.disparos.filter(
-        (disparo) => !disparo.verificarColisao
-      );
+      this.verificarColisoes();
 
       // Renderiza o array de pedras
       this.rocks.forEach((rock, index) => {
@@ -105,7 +95,20 @@ export class Jogo {
       this.player.keyup(key);
     });
   };
+  //verificar colisão
+  verificarColisoes = () => {
+    this.rocks.forEach((rock) => {
+      this.disparos.forEach((disparo) => {
+        rock.colisao(disparo);
+        disparo.colisao(rock);
+      });
+    });
 
+    this.rocks = this.rocks.filter((rock) => !rock.verificarColisao);
+    this.disparos = this.disparos.filter(
+      (disparo) => !disparo.verificarColisao
+    );
+  };
   // Gera os disparos na tela
   gerarDisparos = () => {
     const novoDisparo = new Disparo(
