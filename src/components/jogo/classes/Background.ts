@@ -2,12 +2,12 @@ export class Background {
     private context: CanvasRenderingContext2D;
     private particulas: Particula[] = [];
     private quantidadeParticulas: number;
-    private contador: number
+    private contadorInicial: number
 
-    constructor(context: CanvasRenderingContext2D, quantidadeParticulas: number) {
+    constructor(context: CanvasRenderingContext2D, quantidade: number) {
         this.context = context;
-        this.quantidadeParticulas = quantidadeParticulas;
-        this.contador = 0;
+        this.quantidadeParticulas = quantidade;
+        this.contadorInicial = 0;
     }
 
     // Criador de particulas verifica se o array de particulas é menor que a quantidade de particulas
@@ -22,8 +22,8 @@ export class Background {
             opacity: this.numeroAleatorio(0.3, 0.9),
         };
         for (let i = this.particulas.length; i < this.quantidadeParticulas; i++) {
-            this.contador++;
-            if (this.contador < this.quantidadeParticulas) {
+            this.contadorInicial++;
+            if (this.contadorInicial < this.quantidadeParticulas) {
                 inicio.x = this.numeroAleatorio(0, this.context.canvas.width);
                 inicio.y = this.numeroAleatorio(0, this.context.canvas.height);
             } else {
@@ -45,14 +45,8 @@ export class Background {
     // Desenho as particulas no background
     private desenhar = () => {
         this.particulas.forEach((particula) => {
-            particula.desenhar(this.context);
-        });
-    };
-
-    // Movimento das particulas no background
-    private moverParticulas = () => {
-        this.particulas.forEach((particula) => {
-            particula.position.y += 1
+            particula.mover();
+            particula.desenhar();
         });
     };
 
@@ -68,14 +62,13 @@ export class Background {
     public renderizar = () => {
         this.criadorDeParticulas();
         this.desenhar();
-        this.moverParticulas();
         this.limparForaDaTela();
     };
 }
 
 class Particula {
     public position: { x: number; y: number };
-    public context: CanvasRenderingContext2D;
+    private context: CanvasRenderingContext2D;
     private radius: number;
     private color: string;
     private opacity: number;
@@ -91,13 +84,17 @@ class Particula {
         this.opacity = opacity;
     }
 
-    public desenhar = (context: CanvasRenderingContext2D) => {
-        context.save();
-        context.globalAlpha = this.opacity;
-        context.fillStyle = this.color;
-        context.beginPath();
-        context.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
-        context.fill();
-        context.restore();
+    public mover = () => {
+        this.position.y += 1;
+    };
+
+    public desenhar = () => {
+        this.context.save();
+        this.context.globalAlpha = this.opacity;
+        this.context.fillStyle = this.color;
+        this.context.beginPath();
+        this.context.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
+        this.context.fill();
+        this.context.restore();
     };
 }
