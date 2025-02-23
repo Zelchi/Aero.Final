@@ -4,10 +4,10 @@ export class Crosshair {
     y: number;
     largura: number;
     altura: number;
-    constructor(context: CanvasRenderingContext2D, aim: Position) {
+    constructor(context: CanvasRenderingContext2D) {
         this.context = context;
-        this.x = aim.x;
-        this.y = aim.y;
+        this.x = context.canvas.width / 2;
+        this.y = context.canvas.height / 2;
         this.largura = Math.min(context.canvas.width) * 0.005;
         this.altura = Math.min(context.canvas.width) * 0.005;
     }
