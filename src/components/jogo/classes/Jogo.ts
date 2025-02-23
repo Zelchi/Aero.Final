@@ -119,13 +119,13 @@ export class Jogo {
     );
   };
   //Gerar as particulas
-  gerarParticulas = (x: number, y: number) => {
+  gerarParticulas = (disparoX: number, disparoY: number) => {
     for (let i = 0; i < 10; i++) {
       const particula = new Particula(
-        { x: x, y: y },
+        { x: disparoX, y: disparoY },
         { x: Math.random() - 0.5 * 2, y: Math.random() - 0.5 * 2 },
         5,
-        "grey"
+        "#b1afaf"
       );
       this.particulas.push(particula);
     }
