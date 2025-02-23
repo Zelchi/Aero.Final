@@ -30,7 +30,7 @@ export class Jogo {
   renderizarJogo = () => {
     // Loop do jogo
     this.inputsJogador();
-    this.gerarPedras(this.context, 2000);
+    this.gerarPedras(this.context, 1000);
 
     // Desenha o jogo
     const draw = () => {
