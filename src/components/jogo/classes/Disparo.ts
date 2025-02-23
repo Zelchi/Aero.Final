@@ -11,7 +11,7 @@ export class Disparo {
     this.position = position;
     this.largura = 10;
     this.altura = 10;
-    this.velocity = 10;
+    this.velocity = 20;
     this.angulo = angulo;
     this.verificarColisao = false;
   }
