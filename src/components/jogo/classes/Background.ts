@@ -42,7 +42,7 @@ export class Background {
         return Math.random() * (max - min) + min;
     }
 
-    // Desenho as particulas no background
+    // Desenha as particulas no background e as move
     private desenhar = () => {
         this.particulas.forEach((particula) => {
             particula.mover();
