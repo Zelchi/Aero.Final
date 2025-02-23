@@ -2,6 +2,7 @@ import { Player } from "./Player";
 import { Rock } from "./Rock";
 import { Disparo } from "./Disparo";
 import { Crosshair } from "./Crosshair";
+import { Particula } from "./Particula";
 
 // Classe jogo é responsável por renderizar o jogo.
 // Todas as entidades do jogo são renderizadas aqui.
@@ -12,6 +13,7 @@ export class Jogo {
   crosshair: Crosshair;
   rocks: Rock[];
   disparos: Disparo[];
+  particulas: Particula[];
 
   constructor(context: CanvasRenderingContext2D) {
     this.context = context;
@@ -22,6 +24,7 @@ export class Jogo {
     });
     this.rocks = [];
     this.disparos = [];
+    this.particulas = [];
   }
 
   renderizarJogo = () => {
@@ -44,6 +47,9 @@ export class Jogo {
       //verifica colisão
       this.verificarColisoes();
 
+      // Desenha as particulas
+      this.drawParticulas();
+
       // Renderiza o array de pedras
       this.rocks.forEach((rock, index) => {
         rock.renderizar(rock, this.context);
@@ -54,7 +60,7 @@ export class Jogo {
 
       // Renderiza o array de disparos
       this.disparos.forEach((disparo, index) => {
-        disparo.renderizar(this.context);
+        disparo.update(this.context);
         if (disparo.position.y > this.context.canvas.height) {
           this.disparos.splice(index, 1);
         }
@@ -101,6 +107,9 @@ export class Jogo {
       this.disparos.forEach((disparo) => {
         rock.colisao(disparo);
         disparo.colisao(rock);
+        if (disparo.verificarColisao) {
+          this.gerarParticulas(disparo.position.x, disparo.position.y);
+        }
       });
     });
 
@@ -108,6 +117,24 @@ export class Jogo {
     this.disparos = this.disparos.filter(
       (disparo) => !disparo.verificarColisao
     );
+  };
+  //Gerar as particulas
+  gerarParticulas = (x: number, y: number) => {
+    for (let i = 0; i < 10; i++) {
+      const particula = new Particula(
+        { x: x, y: y },
+        { x: Math.random() - 0.5 * 2, y: Math.random() - 0.5 * 2 },
+        5,
+        "grey"
+      );
+      this.particulas.push(particula);
+    }
+  };
+  //Renderiza as particulas
+  drawParticulas = () => {
+    this.particulas.forEach((particula) => {
+      particula.update(this.context);
+    });
   };
   // Gera os disparos na tela
   gerarDisparos = () => {

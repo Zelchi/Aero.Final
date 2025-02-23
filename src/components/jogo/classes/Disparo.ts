@@ -30,7 +30,7 @@ export class Disparo {
     );
     context.restore();
   }
-  renderizar(context: CanvasRenderingContext2D) {
+  update(context: CanvasRenderingContext2D) {
     this.draw(context);
     this.position.x += Math.cos(this.angulo) * this.velocity;
     this.position.y += Math.sin(this.angulo) * this.velocity;

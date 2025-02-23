@@ -14,7 +14,7 @@ export class Rock {
   constructor(larguraTela: number, alturaTela: number) {
     this.largura = Math.min(larguraTela, alturaTela) * 0.05;
     this.altura = Math.min(larguraTela, alturaTela) * 0.05;
-    this.velocidade = alturaTela * 0.002;
+    this.velocidade = alturaTela * 0.003;
     this.rotationSpeed = 0.5;
     this.verificarColisao = false;
     this.position = {
