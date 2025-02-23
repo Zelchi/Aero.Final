@@ -50,6 +50,9 @@ export class Jogo {
       // Desenha as particulas
       this.drawParticulas();
 
+      //limpa as particulas
+      this.limparParticulas();
+
       // Renderiza o array de pedras
       this.rocks.forEach((rock, index) => {
         rock.renderizar(rock, this.context);
@@ -134,6 +137,14 @@ export class Jogo {
   drawParticulas = () => {
     this.particulas.forEach((particula) => {
       particula.update(this.context);
+    });
+  };
+  // Limpar as particulas
+  limparParticulas = () => {
+    this.particulas.forEach((particula) => {
+      if (particula.opacity <= 0) {
+        this.particulas.splice(this.particulas.indexOf(particula), 1);
+      }
     });
   };
   // Gera os disparos na tela
