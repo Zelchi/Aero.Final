@@ -3,6 +3,7 @@ import { Rock } from "./Rock";
 import { Disparo } from "./Disparo";
 import { Crosshair } from "./Crosshair";
 import { Particula } from "./Particula";
+import { Background } from "./Background";
 
 // Classe jogo é responsável por renderizar o jogo.
 // Todas as entidades do jogo são renderizadas aqui.
@@ -14,6 +15,7 @@ export class Jogo {
   rocks: Rock[];
   disparos: Disparo[];
   particulas: Particula[];
+  background: Background[];
 
   constructor(context: CanvasRenderingContext2D) {
     this.context = context;
@@ -25,6 +27,7 @@ export class Jogo {
     this.rocks = [];
     this.disparos = [];
     this.particulas = [];
+    this.background = [];
   }
 
   renderizarJogo = () => {
@@ -44,8 +47,14 @@ export class Jogo {
       ); // Limpa para o novo frame
       this.context.save(); // Salvando o estado do contexto
 
-      //verifica colisão
+      //Background
       this.verificarColisoes();
+
+      // gera o background
+      this.gerarBackground();
+
+      // Desenha o background
+      this.drawBackground();
 
       // Desenha as particulas
       this.drawParticulas();
@@ -165,5 +174,21 @@ export class Jogo {
       const novaPedra = new Rock(context.canvas.width, context.canvas.height);
       this.rocks.push(novaPedra);
     }, intervalo);
+  };
+
+  //gerar background
+  gerarBackground = () => {
+    for (let i = 0; i < 10; i++) {
+      const background = new Background(this.context, "#b1afaf", 1);
+      if (this.background.length < 50) {
+        this.background.push(background);
+      }
+    }
+  };
+  //Renderiza o background
+  drawBackground = () => {
+    this.background.forEach((background) => {
+      background.draw(this.context);
+    });
   };
 }
