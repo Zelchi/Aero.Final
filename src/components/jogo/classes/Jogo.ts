@@ -3,7 +3,7 @@ import { Rocks } from "./Rock";
 import { Projeteis } from "./Disparo";
 import { Crosshair } from "./Crosshair";
 import { Background } from "./Background";
-import { Eventos } from "./Colisão";
+import { Eventos } from "./Eventos";
 
 // Classe jogo é responsável por renderizar o jogo.
 // Todas as entidades do jogo são renderizadas aqui.
@@ -24,12 +24,13 @@ export class Jogo {
         this.background = new Background(context, 100);
         this.projeteis = new Projeteis(context);
         this.rocks = new Rocks(context);
-        this.eventos = new Eventos(context);
+        this.eventos = new Eventos();
     }
 
     renderizarJogo = () => {
         this.rocks.gerarPedras(this.context, 1000);
-        this.inputsJogador();
+        this.eventos.inputTeclas(this.player);
+        this.eventos.inputMouse(this.crosshair, this.player, this.projeteis);
 
         // Desenha o jogo
         const draw = () => {
@@ -62,31 +63,5 @@ export class Jogo {
         requestAnimationFrame(draw);
     };
 
-    inputsJogador = () => {
-        // Evento de mover o mouse
-        document.addEventListener("mousemove", (e) => {
-            this.crosshair.update({ x: e.clientX, y: e.clientY });
-        });
 
-        // Evento de pressionar clique do mouse
-        document.addEventListener("click", () => {
-            this.projeteis.criarDisparo({
-                x: this.player.position.x + this.player.largura / 2,
-                y: this.player.position.y + this.player.altura / 2,
-            },
-                this.player.angulo - Math.PI / 2);
-        });
-
-        // Evento de pressionar a tecla
-        document.addEventListener("keydown", (e) => {
-            const key = e.key.toLowerCase();
-            this.player.keydown(key);
-        });
-
-        // Evento de soltar a tecla
-        document.addEventListener("keyup", (e) => {
-            const key = e.key.toLowerCase();
-            this.player.keyup(key);
-        });
-    };
 }
