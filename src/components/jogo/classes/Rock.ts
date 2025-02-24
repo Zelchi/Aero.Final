@@ -34,14 +34,14 @@ export class Rocks {
 }
 
 class Rock {
-    largura: number;
-    altura: number;
-    velocidade: number;
-    rotationSpeed: number;
-    position: { x: number; y: number };
-    image: HTMLImageElement;
-    angle: number;
-    colidiu: boolean;
+    public largura: number;
+    public altura: number;
+    public colidiu: boolean;
+    private velocidade: number;
+    private rotationSpeed: number;
+    public position: { x: number; y: number };
+    private image: HTMLImageElement;
+    private angle: number;
 
     constructor(larguraTela: number, alturaTela: number) {
         this.largura = Math.min(larguraTela, alturaTela) * 0.05;
@@ -90,6 +90,13 @@ class Rock {
     mover = () => {
         this.position.y += this.velocidade;
     };
+
+    verificarColisao = () => {
+        if (this.colidiu) {
+            this.position.y = -100;
+            this.colidiu = false;
+        }
+    }
 
     renderizar = (rocks: Rock, context: CanvasRenderingContext2D) => {
         rocks.mover();
