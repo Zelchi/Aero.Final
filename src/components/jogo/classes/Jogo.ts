@@ -29,7 +29,7 @@ export class Jogo {
 
     renderizarJogo = () => {
         this.rocks.gerarPedras(this.context, 1000);
-        this.eventos.inputTeclas(this.player);
+        this.eventos.inputTecla(this.player);
         this.eventos.inputMouse(this.crosshair, this.player, this.projeteis);
 
         // Desenha o jogo
@@ -56,12 +56,11 @@ export class Jogo {
             // Renderiza o crosshair
             this.player.ajustarAngulo({ x: this.crosshair.x, y: this.crosshair.y });
             this.player.renderizar(this.player, this.context);
+            
             this.context.restore(); // Restaurando o estado do contexto
 
             requestAnimationFrame(draw);
         };
         requestAnimationFrame(draw);
     };
-
-
 }

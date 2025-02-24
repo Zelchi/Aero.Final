@@ -23,7 +23,7 @@ export class Eventos {
         }
     }
 
-    public inputTeclas = (player: Player) => {
+    public inputTecla = (player: Player) => {
         // Evento de pressionar a tecla
         document.addEventListener("keydown", (e) => {
             const key = e.key.toLowerCase();
