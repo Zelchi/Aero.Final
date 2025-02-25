@@ -1,9 +1,9 @@
 export class Background {
     private context: CanvasRenderingContext2D;
-    public particulas: Particula[] = [];
     private quantidadeParticulas: number;
     private contadorInicial: number
-
+    private particulas: Particula[] = [];
+    
     constructor(context: CanvasRenderingContext2D, quantidade: number) {
         this.context = context;
         this.quantidadeParticulas = quantidade;

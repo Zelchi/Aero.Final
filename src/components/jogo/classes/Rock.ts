@@ -1,4 +1,5 @@
 import { CAMINHO_PEDRA_IMAGE } from "../../../utils/Constantes";
+import { Inimigo } from "./Inimigo";
 
 export class Rocks {
     private context: CanvasRenderingContext2D;
@@ -22,6 +23,12 @@ export class Rocks {
         });
     };
 
+    private limparHit = () => {
+        this.rocks = this.rocks.filter((rock) => {
+            return !rock.colidiu;
+        });
+    }
+
     public renderizar = () => {
         this.rocks.forEach((rock, index) => {
             rock.renderizar(rock, this.context);
@@ -30,29 +37,27 @@ export class Rocks {
             }
         });
         this.limparForaDaTela();
+        this.limparHit();
     };
 }
 
-class Rock {
-    public largura: number;
-    public altura: number;
-    public colidiu: boolean;
+class Rock extends Inimigo {
     private velocidade: number;
     private rotationSpeed: number;
-    public position: { x: number; y: number };
     private image: HTMLImageElement;
     private angle: number;
 
     constructor(larguraTela: number, alturaTela: number) {
-        this.largura = Math.min(larguraTela, alturaTela) * 0.05;
-        this.altura = Math.min(larguraTela, alturaTela) * 0.05;
-        this.velocidade = alturaTela * 0.003;
-        this.rotationSpeed = 0.5;
-        this.colidiu = false;
-        this.position = {
-            x: this.spawn(0, larguraTela - this.largura),
+        const largura = Math.min(larguraTela, alturaTela) * 0.05;
+        const altura = Math.min(larguraTela, alturaTela) * 0.05;
+        const colidiu = false;
+        const position = {
+            x: Math.random() * (larguraTela - largura) + largura,
             y: -100,
         };
+        super(largura, altura, colidiu, position);
+        this.velocidade = alturaTela * 0.003;
+        this.rotationSpeed = 0.5;
         this.image = this.getImg(CAMINHO_PEDRA_IMAGE);
         this.angle = 0;
     }
@@ -63,7 +68,7 @@ class Rock {
         return image;
     };
 
-    spawn = (min: number, max: number) => {
+    numeroAleatorio = (min: number, max: number) => {
         return Math.random() * (max - min) + min;
     };
 
@@ -90,13 +95,6 @@ class Rock {
     mover = () => {
         this.position.y += this.velocidade;
     };
-
-    verificarColisao = () => {
-        if (this.colidiu) {
-            this.position.y = -100;
-            this.colidiu = false;
-        }
-    }
 
     renderizar = (rocks: Rock, context: CanvasRenderingContext2D) => {
         rocks.mover();

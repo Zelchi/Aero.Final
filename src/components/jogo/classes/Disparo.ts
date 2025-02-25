@@ -28,13 +28,20 @@ export class Projeteis {
         });
     };
 
+    private limparHit = () => {
+        this.projeteis = this.projeteis.filter((projetil) => {
+            return !projetil.colidiu;
+        });
+    }
+
     renderizar = () => {
         this.desenhar();
+        this.limparHit();
         this.limparForaDaTela();
     };
 }
 
-class Disparo {
+export class Disparo {
     position: { x: number; y: number };
     velocity: number;
     largura: number;
