@@ -4,7 +4,8 @@ import { Projeteis } from "./Disparo";
 import { Crosshair } from "./Crosshair";
 import { Background } from "./Background";
 import { Eventos } from "./Eventos";
-import { Inimigo } from "./Inimigo";
+import { Inimigo } from "./entity/Inimigo";
+import { Aliado } from "./entity/Aliado";	
 
 // Classe jogo é responsável por renderizar o jogo.
 // Todas as entidades do jogo são renderizadas aqui.
@@ -17,7 +18,6 @@ export class Jogo {
     projeteis: Projeteis;
     background: Background;
     eventos: Eventos;
-
 
     constructor(context: CanvasRenderingContext2D) {
         this.context = context;
@@ -45,9 +45,8 @@ export class Jogo {
             );
             this.context.save();
 
-
             // Verifica a colisão entre as pedras e os disparos
-            this.eventos.verificarColisao(Inimigo.lista, this.projeteis.projeteis);
+            this.eventos.verificarColisao(Inimigo.lista, Aliado.lista);
             // Cria os diparos do jogador
             this.rocks.renderizar();
             // Renderiza o background

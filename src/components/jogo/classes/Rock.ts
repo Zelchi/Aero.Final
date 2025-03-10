@@ -1,5 +1,5 @@
 import { CAMINHO_PEDRA_IMAGE } from "../../../utils/Constantes";
-import { Inimigo } from "./Inimigo";
+import { Inimigo } from "./entity/Inimigo";
 
 export class Rocks {
     private context: CanvasRenderingContext2D;

@@ -1,18 +1,30 @@
 import { Crosshair } from "./Crosshair";
 import { Projeteis } from "./Disparo";
 import { Player } from "./Player";
-import { Inimigo } from "./Inimigo";
-import { Disparo } from "./Disparo";
+import { Inimigo } from "./entity/Inimigo";
+import { Aliado } from "./entity/Aliado";
 
 export class Eventos {
 
-    public verificarColisao = (
-        entidadesA: Inimigo[],
-        entidadesB: Disparo[],
-    ): void => {
+    private vereficadorDeColisao = (
+        entidadeA: { position: { x: number, y: number }, altura: number, largura: number, colidiu: boolean },
+        entidadeB: { position: { x: number, y: number }, altura: number, largura: number, colidiu: boolean }
+    ) => {
+        if (entidadeA.colidiu || entidadeB.colidiu) return;
+        const colidiu = (
+            entidadeA.position.x < entidadeB.position.x + entidadeB.largura &&
+            entidadeA.position.x + entidadeA.largura > entidadeB.position.x &&
+            entidadeA.position.y < entidadeB.position.y + entidadeB.altura &&
+            entidadeA.position.y + entidadeA.altura > entidadeB.position.y
+        );
+        entidadeA.colidiu = colidiu;
+        entidadeB.colidiu = colidiu;
+    };
+
+    public verificarColisao = (entidadesA: Inimigo[], entidadesB: Aliado[]) => {
         for (const entidadeA of entidadesA) {
             for (const entidadeB of entidadesB) {
-                entidadeA.vereficadorDeColisao(entidadeB);
+                this.vereficadorDeColisao(entidadeA, entidadeB);
             }
         }
     }
