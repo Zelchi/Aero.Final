@@ -47,6 +47,9 @@ export class Jogo {
 
             // Verifica a colisão entre as pedras e os disparos
             this.eventos.verificarColisao(Inimigo.lista, Aliado.lista);
+            console.log("Inimigos: " + Inimigo.lista.length, "Aliados: " + Aliado.lista.length);
+            console.log("Pedras: " + this.rocks.rocks.length, "Disparos: " + this.projeteis.projeteis.length);
+            // console.log(this.rocks.rocks.length, this.projeteis.projeteis.length);
             // Cria os diparos do jogador
             this.rocks.renderizar();
             // Renderiza o background

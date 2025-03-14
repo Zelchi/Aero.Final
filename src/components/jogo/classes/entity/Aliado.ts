@@ -13,7 +13,21 @@ export class Aliado {
         this.colidiu = colidiu;
     }
 
+    private destruirContato = () => {
+        Aliado.lista = Aliado.lista.filter((entidade) => {
+            return !entidade.colidiu
+        });
+    }
+
+    private destruirForaDaTela = () => {
+        Aliado.lista = Aliado.lista.filter((entidade) => {
+            return entidade.position.y < window.innerHeight && entidade.position.x < window.innerWidth;
+        });
+    }
+
     private registrar = () => {
+        this.destruirContato();
+        this.destruirForaDaTela();
         Aliado.lista.push(this);
     }
 }

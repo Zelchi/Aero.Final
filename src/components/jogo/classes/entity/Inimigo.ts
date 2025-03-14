@@ -1,3 +1,5 @@
+
+
 export class Inimigo {
     public static lista: Inimigo[] = [];
     public position: Position;
@@ -13,7 +15,21 @@ export class Inimigo {
         this.colidiu = colidiu;
     }
 
+    private destruirContato = () => {
+        Inimigo.lista = Inimigo.lista.filter((entidade) => {
+            return !entidade.colidiu
+        });
+    }
+
+    private destruirForaDaTela = () => {
+        Inimigo.lista = Inimigo.lista.filter((entidade) => {
+            return entidade.position.y < window.innerHeight && entidade.position.x < window.innerWidth;
+        });
+    }
+
     private registrar = () => {
+        this.destruirContato();
+        this.destruirForaDaTela();
         Inimigo.lista.push(this);
     }
 }

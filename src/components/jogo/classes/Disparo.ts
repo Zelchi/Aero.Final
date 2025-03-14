@@ -1,3 +1,5 @@
+import { Aliado } from "./entity/Aliado";
+
 export class Projeteis {
     private context: CanvasRenderingContext2D;
     public projeteis: Disparo[] = [];
@@ -41,7 +43,7 @@ export class Projeteis {
     };
 }
 
-export class Disparo {
+export class Disparo extends Aliado {
     position: { x: number; y: number };
     velocity: number;
     largura: number;
@@ -49,6 +51,7 @@ export class Disparo {
     angulo: number;
     colidiu: boolean;
     constructor(position: { x: number; y: number }, angulo: number) {
+        super(10, 10, false, position);
         this.position = position;
         this.largura = 10;
         this.altura = 10;

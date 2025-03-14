@@ -17,8 +17,8 @@ export class Eventos {
             entidadeA.position.y < entidadeB.position.y + entidadeB.altura &&
             entidadeA.position.y + entidadeA.altura > entidadeB.position.y
         );
-        entidadeA.colidiu = colidiu;
-        entidadeB.colidiu = colidiu;
+        entidadeA.colidiu = colidiu
+        entidadeB.colidiu = colidiu
     };
 
     public verificarColisao = (entidadesA: Inimigo[], entidadesB: Aliado[]) => {

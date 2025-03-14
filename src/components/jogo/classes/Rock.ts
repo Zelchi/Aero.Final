@@ -19,9 +19,11 @@ export class Rocks {
 
     private limparForaDaTela = () => {
         this.rocks = this.rocks.filter((rock) => {
-            return rock.position.y < this.context.canvas.height;
+            if (rock.position.y < this.context.canvas.height) {
+                return !rock.colidiu;
+            }
         });
-    };
+    }
 
     private limparHit = () => {
         this.rocks = this.rocks.filter((rock) => {
