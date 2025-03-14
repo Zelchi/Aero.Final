@@ -58,6 +58,8 @@ export class Jogo {
             this.crosshair.renderizar();
             // Renderiza o player
             this.background.renderizar();
+            // Renderizar particulas
+            
             // Renderiza o crosshair
             this.player.ajustarAngulo({ x: this.crosshair.x, y: this.crosshair.y });
             this.player.renderizar(this.player, this.context);
