@@ -1,5 +1,3 @@
-
-
 export class Inimigo {
     public static lista: Inimigo[] = [];
     public position: Position;
