@@ -3,7 +3,7 @@
 <p>Tecnologias usadas:<p>
 <p>🎯 TypeScript – Lógica do jogo<p>
 <p>⚛️ React – Interface dos menus<p>
-<p>🖥️ Electron – Programa desktop nativo<p>
+<p>🖥️ Electron – App desktop nativo<p>
 
 ![Menu](./public/Menu.png)
 ![Jogo](./public/EmJogo.png)
