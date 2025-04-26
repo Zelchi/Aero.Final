@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Jogo } from "./classes/Jogo";
+import { Jogo } from "./Jogo";
 import styled from "styled-components";
 
 const Canva = styled.canvas`

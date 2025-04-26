@@ -106,11 +106,19 @@ export class Player {
         context.drawImage(this.engineSprites, this.sx, 0, 48, 48, this.position.x, this.position.y + 10, this.largura, this.altura);
         context.drawImage(this.engineImage, this.position.x, this.position.y + 5, this.largura, this.altura);
 
-        // Linha hitbox
-        context.strokeStyle = 'red';
-        context.beginPath();
-        context.arc(this.hitbox.x, this.hitbox.y, this.hitbox.radius, 0, Math.PI * 2);
-        context.stroke();
+        // Linhas para debug
+        // context.strokeStyle = 'red';
+        // context.beginPath();
+        // context.arc(this.hitbox.x, this.hitbox.y, this.hitbox.radius, 0, Math.PI * 2);
+        // context.stroke();
+        // context.beginPath();
+        // context.moveTo(0, 400);
+        // context.lineTo(0, -400);
+        // context.stroke();
+        // context.beginPath();
+        // context.moveTo(-400, 0);
+        // context.lineTo(400, 0);
+        // context.stroke();
 
         context.restore();
         this.updateSprite();
@@ -136,15 +144,6 @@ export class Player {
         if (keys.down && player.position.y < tela.altura - player.altura) {
             player.moveDown();
         }
-
-        context.beginPath();
-        context.moveTo(0, 400);
-        context.lineTo(0, -400);
-        context.stroke();
-        context.beginPath();
-        context.moveTo(-400, 0);
-        context.lineTo(400, 0);
-        context.stroke();
 
         context.translate(
             -player.position.x - player.largura / 2,

@@ -1,11 +1,11 @@
-import { Player } from "./Player";
-import { Rocks } from "./Rock";
-import { Projeteis } from "./Disparo";
-import { Crosshair } from "./Crosshair";
-import { Background } from "./Background";
-import { Eventos } from "./Eventos";
-import { Inimigo } from "./entity/Inimigo";
-import { Aliado } from "./entity/Aliado";	
+import { Player } from "./classes/Player";
+import { Rocks } from "./classes/Rock";
+import { Projeteis } from "./classes/Disparo";
+import { Crosshair } from "./classes/Crosshair";
+import { Background } from "./classes/Background";
+import { Eventos } from "./classes/Eventos";
+import { Inimigo } from "./classes/entity/Inimigo";
+import { Aliado } from "./classes/entity/Aliado";	
 
 // Classe jogo é responsável por renderizar o jogo.
 // Todas as entidades do jogo são renderizadas aqui.
